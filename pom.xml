@@ -84,6 +84,12 @@
 			<artifactId>ikanalyzer</artifactId>
 			<version>2012_u6</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>4.2.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -105,6 +111,12 @@
 			</plugin>
 
 			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>4.2.0</version>
+			</plugin>
+
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
@@ -113,6 +125,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>
