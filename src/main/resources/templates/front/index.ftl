@@ -1,60 +1,267 @@
-<#include "/front/layout/_titleNav.ftl">
-<@html>
-<div class="top">
-    <section class="box">
-        <ul class="texts">
-            <p>越是错综复杂的问题。</p>
-            <p>就越要根据简单的原理和朴素的思想进行判断和行动。</p>
-            <p>我想这是拨开云雾见南山，直接洞悉事物本质和解决问题的最佳方法。</p>
-            <p>                                         ——稻盛和夫 《活法》。</p>
-        </ul>
-        <div class="avatar"><a href="#"><span>Jcohy</span></a> </div>
-    </section>
-</div>
-<!-- 主体 -->
-<div class="blog-body">
+<!DOCTYPE html>
 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; Charset=gb2312">
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>招聘网站</title>
+    <link rel="shortcut icon" href="${ctx!}/images/Logo_40.png" type="image/x-icon">
+    <!--Layui-->
+    <link href="${ctx!}/plug/layui/css/layui.css" rel="stylesheet" />
+    <!--font-awesome-->
+    <link href="${ctx!}/plug/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!--全局样式表-->
+    <link href="${ctx!}/css/global.css" rel="stylesheet" />
+    <!-- 本页样式表 -->
+    <link href="${ctx!}/css/home.css" rel="stylesheet" />
+</head>
+<body>
+<!-- 导航 -->
+<nav class="blog-nav layui-header">
+    <div class="blog-container">
+        <!-- 不落阁 -->
+        <a class="blog-logo" href="/">不落阁</a>
+        <!-- 导航菜单 -->
+        <ul class="layui-nav" lay-filter="nav">
+            <li class="layui-nav-item layui-this">
+                <a href="home.html"><i class="fa fa-home fa-fw"></i>&nbsp;网站首页</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="article.ftl"><i class="fa fa-file-text fa-fw"></i>&nbsp;文章专栏</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="resource.ftl"><i class="fa fa-tags fa-fw"></i>&nbsp;资源分享</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="timeline.ftl"><i class="fa fa-hourglass-half fa-fw"></i>&nbsp;点点滴滴</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="about.ftl"><i class="fa fa-info fa-fw"></i>&nbsp;关于本站</a>
+            </li>
+            <li class="layui-nav-item">
+                <a class="iconfont icon-touxiang layui-hide-xs" href="/user/login/"></a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="/user/login/">登入</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="/user/reg/">注册</a>
+            </li>
+        </ul>
+        <!-- 手机和平板的导航开关 -->
+        <a class="blog-navicon" href="javascript:;">
+            <i class="fa fa-navicon"></i>
+        </a>
+    </div>
+</nav>
+<!-- 主体（一般只改变这里的内容） -->
+<div class="blog-body">
+    <!-- canvas -->
+    <canvas id="canvas-banner" style="background: #393D49;"></canvas>
+    <!--为了及时效果需要立即设置canvas宽高，否则就在home.js中设置-->
+    <script type="text/javascript">
+        var canvas = document.getElementById('canvas-banner');
+        canvas.width = window.document.body.clientWidth - 10;//减去滚动条的宽度
+        if (screen.width >= 992) {
+            canvas.height = window.innerHeight * 1 / 3;
+        } else {
+            canvas.height = window.innerHeight * 2 / 7;
+        }
+    </script>
+    <!-- 这个一般才是真正的主体内容 -->
     <div class="blog-container">
         <div class="blog-main">
-
-            <!-- 公告部分 start -->
+            <!-- 网站公告提示 -->
             <div class="home-tips shadow">
                 <i style="float:left;line-height:17px;" class="fa fa-volume-up"></i>
                 <div class="home-tips-container">
-                    <@noticeList>
-                        <#list list as x>
-                            <#if x.url != null>
-                                <span style="color: red">${(x.content)!}<a href="${x.url}" target="_blank" style="color:#01AAED">&nbsp;&nbsp;点我前往</a></span>
-                            <#else >
-                                <span style="color: #009688">${(x.content)!}</span>
-                            </#if>
-                        </#list>
-                    </@noticeList>
+                    <span style="color: #009688">偷偷告诉大家，本博客的后台管理也正在制作，为大家准备了游客专用账号！</span>
+                    <span style="color: red">网站新增留言回复啦！使用QQ登陆即可回复，人人都可以回复！</span>
+                    <span style="color: red">如果你觉得网站做得还不错，来Fly社区点个赞吧！<a href="http://fly.layui.com/case/2017/" target="_blank" style="color:#01AAED">点我前往</a></span>
+                    <span style="color: #009688">不落阁 &nbsp;—— &nbsp;一个.NET程序员的个人博客，新版网站采用Layui为前端框架，目前正在建设中！</span>
                 </div>
             </div>
-            <!-- 公告部分 end -->
-
-            <!-- banner start-->
+            <!--左边文章列表-->
             <div class="blog-main-left">
-                <div class="layui-carousel" id="banner">
-                    <div carousel-item="">
-                        <div><img src="${ctx!}/static/images/banner1.jpg" class="banner"></div>
-                        <div><img src="${ctx!}/static/images/banner2.jpg" class="banner"></div>
-                        <div><img src="${ctx!}/static/images/banner3.jpg" class="banner"></div>
+                <div class="article shadow">
+                    <div class="article-left">
+                        <img src="../images/cover/201703181909057125.jpg" alt="基于laypage的layui扩展模块（pagesize.js）！" />
+                    </div>
+                    <div class="article-right">
+                        <div class="article-title">
+                            <a href="detail.ftl">基于laypage的layui扩展模块（pagesize.js）！</a>
+                        </div>
+                        <div class="article-abstract">
+                            该模块主要是针对当前版本laypage没有页容量控制功能而制作，使用该模块后即可实现每页显示多少条数据的控制！本人原创，但是可能有可能只对本人的分页写法有用！
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="article-footer">
+                        <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-03-18</span>
+                        <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
+                        <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">Web前端</a></span>
+                        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>
+                        <span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>
+                    </div>
+                </div>
+                <div class="article shadow">
+                    <div class="article-left">
+                        <img src="../images/cover/201703181909057125.jpg" alt="基于laypage的layui扩展模块（pagesize.js）！" />
+                    </div>
+                    <div class="article-right">
+                        <div class="article-title">
+                            <a href="detail.ftl">基于laypage的layui扩展模块（pagesize.js）！</a>
+                        </div>
+                        <div class="article-abstract">
+                            该模块主要是针对当前版本laypage没有页容量控制功能而制作，使用该模块后即可实现每页显示多少条数据的控制！本人原创，但是可能有可能只对本人的分页写法有用！
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="article-footer">
+                        <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-03-18</span>
+                        <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
+                        <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">Web前端</a></span>
+                        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>
+                        <span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>
+                    </div>
+                </div>
+                <div class="article shadow">
+                    <div class="article-left">
+                        <img src="../images/cover/201703181909057125.jpg" alt="基于laypage的layui扩展模块（pagesize.js）！" />
+                    </div>
+                    <div class="article-right">
+                        <div class="article-title">
+                            <a href="detail.ftl">基于laypage的layui扩展模块（pagesize.js）！</a>
+                        </div>
+                        <div class="article-abstract">
+                            该模块主要是针对当前版本laypage没有页容量控制功能而制作，使用该模块后即可实现每页显示多少条数据的控制！本人原创，但是可能有可能只对本人的分页写法有用！
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="article-footer">
+                        <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-03-18</span>
+                        <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
+                        <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">Web前端</a></span>
+                        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>
+                        <span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>
+                    </div>
+                </div>
+                <div class="article shadow">
+                    <div class="article-left">
+                        <img src="../images/cover/201703181909057125.jpg" alt="基于laypage的layui扩展模块（pagesize.js）！" />
+                    </div>
+                    <div class="article-right">
+                        <div class="article-title">
+                            <a href="detail.ftl">基于laypage的layui扩展模块（pagesize.js）！</a>
+                        </div>
+                        <div class="article-abstract">
+                            该模块主要是针对当前版本laypage没有页容量控制功能而制作，使用该模块后即可实现每页显示多少条数据的控制！本人原创，但是可能有可能只对本人的分页写法有用！
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="article-footer">
+                        <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-03-18</span>
+                        <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
+                        <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">Web前端</a></span>
+                        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>
+                        <span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>
+                    </div>
+                </div>
+                <div class="article shadow">
+                    <div class="article-left">
+                        <img src="../images/cover/201703181909057125.jpg" alt="基于laypage的layui扩展模块（pagesize.js）！" />
+                    </div>
+                    <div class="article-right">
+                        <div class="article-title">
+                            <a href="detail.ftl">基于laypage的layui扩展模块（pagesize.js）！</a>
+                        </div>
+                        <div class="article-abstract">
+                            该模块主要是针对当前版本laypage没有页容量控制功能而制作，使用该模块后即可实现每页显示多少条数据的控制！本人原创，但是可能有可能只对本人的分页写法有用！
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="article-footer">
+                        <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-03-18</span>
+                        <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
+                        <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">Web前端</a></span>
+                        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>
+                        <span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>
+                    </div>
+                </div>
+                <div class="article shadow">
+                    <div class="article-left">
+                        <img src="../images/cover/201703181909057125.jpg" alt="基于laypage的layui扩展模块（pagesize.js）！" />
+                    </div>
+                    <div class="article-right">
+                        <div class="article-title">
+                            <a href="detail.ftl">基于laypage的layui扩展模块（pagesize.js）！</a>
+                        </div>
+                        <div class="article-abstract">
+                            该模块主要是针对当前版本laypage没有页容量控制功能而制作，使用该模块后即可实现每页显示多少条数据的控制！本人原创，但是可能有可能只对本人的分页写法有用！
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="article-footer">
+                        <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-03-18</span>
+                        <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
+                        <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">Web前端</a></span>
+                        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>
+                        <span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>
+                    </div>
+                </div>
+                <div class="article shadow">
+                    <div class="article-left">
+                        <img src="../images/cover/201703181909057125.jpg" alt="基于laypage的layui扩展模块（pagesize.js）！" />
+                    </div>
+                    <div class="article-right">
+                        <div class="article-title">
+                            <a href="detail.ftl">基于laypage的layui扩展模块（pagesize.js）！</a>
+                        </div>
+                        <div class="article-abstract">
+                            该模块主要是针对当前版本laypage没有页容量控制功能而制作，使用该模块后即可实现每页显示多少条数据的控制！本人原创，但是可能有可能只对本人的分页写法有用！
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="article-footer">
+                        <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-03-18</span>
+                        <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
+                        <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">Web前端</a></span>
+                        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>
+                        <span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>
+                    </div>
+                </div>
+                <div class="article shadow">
+                    <div class="article-left">
+                        <img src="../images/cover/201703181909057125.jpg" alt="基于laypage的layui扩展模块（pagesize.js）！" />
+                    </div>
+                    <div class="article-right">
+                        <div class="article-title">
+                            <a href="detail.ftl">基于laypage的layui扩展模块（pagesize.js）！</a>
+                        </div>
+                        <div class="article-abstract">
+                            该模块主要是针对当前版本laypage没有页容量控制功能而制作，使用该模块后即可实现每页显示多少条数据的控制！本人原创，但是可能有可能只对本人的分页写法有用！
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="article-footer">
+                        <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-03-18</span>
+                        <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
+                        <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">Web前端</a></span>
+                        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>
+                        <span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>
                     </div>
                 </div>
             </div>
-            <!--banner end-->
-
-            <!--profile info start -->
+            <!--右边小栏目-->
             <div class="blog-main-right">
                 <div class="blogerinfo shadow">
                     <div class="blogerinfo-figure">
-                        <img src="${ctx!}/images/ico/jcohy.png" alt="Jcohy" title="Jcohy" style="width: 100px;height: 100px;border-radius: 50px"/>
+                        <img src="../images/Absolutely.jpg" alt="Absolutely" />
                     </div>
-                    <p class="blogerinfo-nickname">Jcohy</p>
-                    <p class="blogerinfo-introduce">一枚90后程序员，Java开发工程师</p>
-                    <p class="blogerinfo-location"><i class="fa fa-location-arrow"></i>&nbsp;陕西 - 西安</p>
+                    <p class="blogerinfo-nickname">Absolutely</p>
+                    <p class="blogerinfo-introduce">一枚90后程序员，.NET开发工程师</p>
+                    <p class="blogerinfo-location"><i class="fa fa-location-arrow"></i>&nbsp;四川 - 成都</p>
                     <hr />
                     <div class="blogerinfo-contact">
                         <a target="_blank" title="QQ交流" href="javascript:layer.msg('启动QQ会话窗口')"><i class="fa fa-qq fa-2x"></i></a>
@@ -63,98 +270,108 @@
                         <a target="_blank" title="码云" href="javascript:layer.msg('转到你的github主页')"><i class="fa fa-git fa-2x"></i></a>
                     </div>
                 </div>
-            </div>
-            <!--profile Info end-->
-
-            <!--article start-->
-            <div class="blog-main-center">
-                <div class="blog-module shadow" style="position: relative">
-                    <div class="blog-module-title" style="line-height: 34px;font-size: 16px">
-                        <h4>热文排行
-                            <a class="moreitem" href="">
-                                更多&nbsp;&nbsp;
-                            <#--<i class="layui-icon">&#xe65b;-->
-                            </a>
-                        </h4>
-
-                    </div>
-
-                    <div class="layui-tab">
-                        <ul class="layui-tab-title">
-                            <li class="layui-this">阅读排行</li>
-                            <li>分享排行</li>
-                        <#--<li>其他</li>-->
-                        </ul>
-                        <div class="layui-tab-content">
-                            <div class="layui-tab-item layui-show">
-                                <ul class="fa-ul blog-module-ul" style="margin-left: 0">
-                                    <@blogList type="readNum">
-                                        <#list list as x>
-                                            <div class="article shadow">
-                                                <div class="article-left">
-                                                    <img src="${ctx!}/${(x.coverURL)!}" alt="${(x.coverURL)!}" />
-                                                </div>
-                                                <div class="article-right">
-                                                    <div class="article-title">
-                                                        <a href="${ctx!}/article/view/${x.id}">${(x.title)!}</a>
-                                                    </div>
-                                                    <div class="article-abstract">
-                                                    ${(x.summary)!}
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                                <div class="article-footer">
-                                                    <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;${(x.createDate)!}</span>
-                                                    <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;${(x.author.nickName)!}</span>
-                                                    <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">${(x.tags)!}</a></span>
-                                                    <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;${(x.readNum)!}</span>
-                                                    <span class="article-viewinfo"><i class="fa fa-star"></i>&nbsp;${(x.heartNum)!}</span>
-                                                    <span class="article-viewinfo"><i class="fa fa-share-square-o"></i>&nbsp;${(x.shareNum)!}</span>
-                                                </div>
-                                            </div>
-                                        </#list>
-                                    </@blogList>
-                                </ul>
-                            </div>
-                            <div class="layui-tab-item">
-                                <ul class="fa-ul blog-module-ul" style="margin-left: 0">
-                                    <@blogList type="shareNum">
-                                        <#list list as x>
-                                            <div class="article shadow">
-                                                <div class="article-left">
-                                                    <img src="${ctx!}/${(x.coverURL)!}" alt="${(x.coverURL)!}" />
-                                                </div>
-                                                <div class="article-right">
-                                                    <div class="article-title">
-                                                        <a href="${ctx!}/article/view/${x.id}">${(x.title)!}</a>
-                                                    </div>
-                                                    <div class="article-abstract">
-                                                    ${(x.summary)!}
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                                <div class="article-footer">
-                                                    <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;${(x.createDate)!}</span>
-                                                    <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;${(x.author.nickName)!}</span>
-                                                    <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">${(x.tags)!}</a></span>
-                                                    <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;${(x.readNum)!}</span>
-                                                    <span class="article-viewinfo"><i class="fa fa-star"></i>&nbsp;${(x.heartNum)!}</span>
-                                                    <span class="article-viewinfo"><i class="fa fa-share-square-o"></i>&nbsp;${(x.shareNum)!}</span>
-                                                </div>
-                                            </div>
-                                        </#list>
-                                    </@blogList>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div></div><!--占位-->
+                <div class="blog-module shadow">
+                    <div class="blog-module-title">热文排行</div>
+                    <ul class="fa-ul blog-module-ul">
+                        <li><i class="fa-li fa fa-hand-o-right"></i><a href="detail.ftl">Web安全之跨站请求伪造CSRF</a></li>
+                        <li><i class="fa-li fa fa-hand-o-right"></i><a href="detail.ftl">ASP.NET MVC 防范跨站请求伪造（CSRF）</a></li>
+                        <li><i class="fa-li fa fa-hand-o-right"></i><a href="detail.ftl">常用正则表达式</a></li>
+                        <li><i class="fa-li fa fa-hand-o-right"></i><a href="detail.ftl">EF CodeFirst数据迁移常用指令</a></li>
+                        <li><i class="fa-li fa fa-hand-o-right"></i><a href="detail.ftl">浅谈.NET Framework基元类型</a></li>
+                        <li><i class="fa-li fa fa-hand-o-right"></i><a href="detail.ftl">C#基础知识回顾-扩展方法</a></li>
+                        <li><i class="fa-li fa fa-hand-o-right"></i><a href="detail.ftl">一步步制作时光轴（一）（HTML篇）</a></li>
+                        <li><i class="fa-li fa fa-hand-o-right"></i><a href="detail.ftl">一步步制作时光轴（二）（CSS篇）</a></li>
+                    </ul>
+                </div>
+                <div class="blog-module shadow">
+                    <div class="blog-module-title">最近分享</div>
+                    <ul class="fa-ul blog-module-ul">
+                        <li><i class="fa-li fa fa-hand-o-right"></i><a href="http://pan.baidu.com/s/1c1BJ6Qc" target="_blank">Canvas</a></li>
+                        <li><i class="fa-li fa fa-hand-o-right"></i><a href="http://pan.baidu.com/s/1kVK8UhT" target="_blank">pagesize.js</a></li>
+                        <li><i class="fa-li fa fa-hand-o-right"></i><a href="https://pan.baidu.com/s/1mit2aiW" target="_blank">时光轴</a></li>
+                        <li><i class="fa-li fa fa-hand-o-right"></i><a href="https://pan.baidu.com/s/1nuAKF81" target="_blank">图片轮播</a></li>
+                    </ul>
+                </div>
+                <div class="blog-module shadow">
+                    <div class="blog-module-title">一路走来</div>
+                    <dl class="footprint">
+                        <dt>2017年03月12日</dt>
+                        <dd>新增留言回复功能！人人都可参与回复！</dd>
+                        <dt>2017年03月10日</dt>
+                        <dd>不落阁2.0基本功能完成，正式上线！</dd>
+                        <dt>2017年03月09日</dt>
+                        <dd>新增文章搜索功能！</dd>
+                        <dt>2017年02月25日</dt>
+                        <dd>QQ互联接入网站，可QQ登陆发表评论与留言！</dd>
+                    </dl>
+                </div>
+                <div class="blog-module shadow">
+                    <div class="blog-module-title">后台记录</div>
+                    <dl class="footprint">
+                        <dt>2017年03月16日</dt>
+                        <dd>分页新增页容量控制</dd>
+                        <dt>2017年03月12日</dt>
+                        <dd>新增管家提醒功能</dd>
+                        <dt>2017年03月10日</dt>
+                        <dd>新增Win10快捷菜单</dd>
+                    </dl>
+                </div>
+                <div class="blog-module shadow">
+                    <div class="blog-module-title">友情链接</div>
+                    <ul class="blogroll">
+                        <li><a target="_blank" href="http://www.layui.com/" title="Layui">Layui</a></li>
+                        <li><a target="_blank" href="http://www.pagemark.cn/" title="页签">页签</a></li>
+                    </ul>
                 </div>
             </div>
-            <!-- article end -->
+            <div class="clear"></div>
         </div>
     </div>
-
 </div>
-
-
-</@html>
+<!-- 底部 -->
+<footer class="blog-footer">
+    <p><span>Copyright</span><span>&copy;</span><span>2017</span><a href="http://www.lyblogs.cn">不落阁</a><span>Design By LY</span></p>
+    <p><a href="http://www.miibeian.gov.cn/" target="_blank">蜀ICP备16029915号-1</a></p>
+</footer>
+<!--侧边导航-->
+<ul class="layui-nav layui-nav-tree layui-nav-side blog-nav-left layui-hide" lay-filter="nav">
+    <li class="layui-nav-item layui-this">
+        <a href="home.html"><i class="fa fa-home fa-fw"></i>&nbsp;网站首页</a>
+    </li>
+    <li class="layui-nav-item">
+        <a href="article.ftl"><i class="fa fa-file-text fa-fw"></i>&nbsp;文章专栏</a>
+    </li>
+    <li class="layui-nav-item">
+        <a href="resource.ftl"><i class="fa fa-tags fa-fw"></i>&nbsp;资源分享</a>
+    </li>
+    <li class="layui-nav-item">
+        <a href="timeline.ftl"><i class="fa fa-road fa-fw"></i>&nbsp;点点滴滴</a>
+    </li>
+    <li class="layui-nav-item">
+        <a href="about.ftl"><i class="fa fa-info fa-fw"></i>&nbsp;关于本站</a>
+    </li>
+</ul>
+<!--分享窗体-->
+<div class="blog-share layui-hide">
+    <div class="blog-share-body">
+        <div style="width: 200px;height:100%;">
+            <div class="bdsharebuttonbox">
+                <a class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                <a class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                <a class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                <a class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--遮罩-->
+<div class="blog-mask animated layui-hide"></div>
+<!-- layui.js -->
+<script src="../plug/layui/layui.js"></script>
+<!-- 全局脚本 -->
+<script src="../js/global.js"></script>
+<!-- 本页脚本 -->
+<script src="../js/home.js"></script>
+</body>
+</html>
