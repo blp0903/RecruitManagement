@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : localhost
 Source Server Version : 50637
 Source Host           : localhost:3306
-Source Database       : perfectteaching
+Source Database       : recruit
 
 Target Server Type    : MYSQL
 Target Server Version : 50637
 File Encoding         : 65001
 
-Date: 2018-03-29 17:23:57
+Date: 2018-04-10 17:23:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,6 +27,7 @@ CREATE TABLE `admin` (
   `admin_birth` datetime DEFAULT NULL,
   `password` varchar(50) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
+  `updatetime` timestamp(0) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -35,177 +36,146 @@ CREATE TABLE `admin` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for dept
+-- Table structure for college
 -- ----------------------------
-DROP TABLE IF EXISTS `dept`;
-CREATE TABLE `dept` (
+DROP TABLE IF EXISTS `college`;
+CREATE TABLE `college` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `dept_num` int(11) NOT NULL,
-  `dept_name` varchar(50) NOT NULL,
-  `dept_chairman` varchar(50) DEFAULT NULL,
-  `dept_tel` varchar(50) DEFAULT NULL,
-  `dept_desc` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of dept
--- ----------------------------
-
--- ----------------------------
--- Table structure for lab
--- ----------------------------
-DROP TABLE IF EXISTS `lab`;
-CREATE TABLE `lab` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `lab_num` int(11) DEFAULT NULL,
-  `lab_name` varchar(50) DEFAULT NULL,
-  `lab_content` varchar(50) DEFAULT NULL,
-  `test_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_test_id` (`test_id`),
-  CONSTRAINT `fk_test_id` FOREIGN KEY (`test_id`) REFERENCES `test` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of lab
--- ----------------------------
-
--- ----------------------------
--- Table structure for major
--- ----------------------------
-DROP TABLE IF EXISTS `major`;
-CREATE TABLE `major` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `major_num` int(11) NOT NULL,
-  `major_name` varchar(50) NOT NULL,
-  `major_tel` varchar(50) DEFAULT NULL,
-  `major_assistant` varchar(50) DEFAULT NULL,
-  `dept_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_major_dept` (`dept_id`),
-  CONSTRAINT `fk_major_dept` FOREIGN KEY (`dept_id`) REFERENCES `dept` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of major
--- ----------------------------
-
--- ----------------------------
--- Table structure for plan
--- ----------------------------
-DROP TABLE IF EXISTS `plan`;
-CREATE TABLE `plan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `t_contemt` text,
-  `dept_id` int(11) DEFAULT NULL,
-  `major_id` int(11) DEFAULT NULL,
-  `start` datetime DEFAULT NULL,
-  `end` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of plan
--- ----------------------------
-
--- ----------------------------
--- Table structure for report
--- ----------------------------
-DROP TABLE IF EXISTS `report`;
-CREATE TABLE `report` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `grade` int(11) DEFAULT NULL,
-  `stulab_id` int(11) DEFAULT NULL,
-  `remark` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_report_stulab` (`stulab_id`),
-  CONSTRAINT `fk_report_stulab` FOREIGN KEY (`stulab_id`) REFERENCES `stulab` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of report
--- ----------------------------
-
--- ----------------------------
--- Table structure for student
--- ----------------------------
-DROP TABLE IF EXISTS `student`;
-CREATE TABLE `student` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `s_num` int(20) NOT NULL,
-  `s_name` varchar(50) NOT NULL,
-  `s_sex` varchar(2) DEFAULT NULL,
-  `s_birth` datetime DEFAULT NULL,
-  `s_class` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `qq` varchar(50) DEFAULT NULL,
+  `college_num` int(11) NOT NULL,
+  `college_name` varchar(50) NOT NULL,
+  `college_chairman` varchar(50) DEFAULT NULL,
+  `college_tel` varchar(50) DEFAULT NULL,
+  `college_desc` text,
   `password` varchar(50) NOT NULL,
-  `status` varchar(50) DEFAULT NULL,
-  `major_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_stu_major` (`major_id`),
-  CONSTRAINT `fk_stu_major` FOREIGN KEY (`major_id`) REFERENCES `major` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of student
--- ----------------------------
-
--- ----------------------------
--- Table structure for stulab
--- ----------------------------
-DROP TABLE IF EXISTS `stulab`;
-CREATE TABLE `stulab` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `s_id` int(11) NOT NULL,
-  `lab_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_stu_id` (`s_id`),
-  KEY `fk_lab_id` (`lab_id`),
-  CONSTRAINT `fk_lab_id` FOREIGN KEY (`lab_id`) REFERENCES `lab` (`id`),
-  CONSTRAINT `fk_stu_id` FOREIGN KEY (`s_id`) REFERENCES `student` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of stulab
--- ----------------------------
-
--- ----------------------------
--- Table structure for teacher
--- ----------------------------
-DROP TABLE IF EXISTS `teacher`;
-CREATE TABLE `teacher` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `t_num` int(11) NOT NULL,
-  `t_name` varchar(50) NOT NULL,
-  `t_sex` varchar(2) DEFAULT NULL,
-  `t_title` varchar(50) DEFAULT NULL,
-  `t_birth` datetime DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `dept_id` int(11) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_teacher_dept` (`dept_id`),
-  CONSTRAINT `fk_teacher_dept` FOREIGN KEY (`dept_id`) REFERENCES `dept` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of teacher
--- ----------------------------
-
--- ----------------------------
--- Table structure for test
--- ----------------------------
-DROP TABLE IF EXISTS `test`;
-CREATE TABLE `test` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `index` int(11) DEFAULT NULL,
-  `content` varchar(255) DEFAULT NULL,
-  `answer` varchar(255) DEFAULT NULL,
+  `updatetime` timestamp(0) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of test
+-- Records of college
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for job_seeker
+-- ----------------------------
+DROP TABLE IF EXISTS `job_seeker`;
+CREATE TABLE `job_seeker` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `job_seeker_num` int(11) NOT NULL,
+  `job_seeker_name` varchar(50) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `job_seeker_sex` varchar(2) DEFAULT NULL,
+  `job_seeker_birth` datetime DEFAULT NULL,
+  `password` varchar(50) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `resume_id` int(11) DEFAULT NULL,
+  `updatetime` timestamp(0) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_resume_id` (`resume_id`),
+  CONSTRAINT `fk_resume_id` FOREIGN KEY (`resume_id`) REFERENCES `resume` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of job_seeker
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for resume
+-- ----------------------------
+DROP TABLE IF EXISTS `resume`;
+CREATE TABLE `resume` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `resume_num` int(11) NOT NULL,
+  `resume_status` int(1) DEFAULT 1,
+  `name` varchar(50) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `id_no` varchar(50) NOT NULL,
+  `sex` varchar(2) NOT NULL,
+  `age` int(2) NOT NULL,
+  `birth` datetime NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `first_education_level` varchar(50) DEFAULT NULL,
+  `first_graduated_school` varchar(50) DEFAULT NULL,
+  `first_education_profession` varchar(50) DEFAULT NULL,
+  `first_education_start` datetime DEFAULT NULL,
+  `first_education_end` datetime DEFAULT NULL,
+  `second_education_level` varchar(50) DEFAULT NULL,
+  `second_graduated_school` varchar(50) DEFAULT NULL,
+  `second_education_profession` varchar(50) DEFAULT NULL,
+  `second_education_start` datetime DEFAULT NULL,
+  `second_education_end` datetime DEFAULT NULL,
+  `third_education_level` varchar(50) DEFAULT NULL,
+  `third_graduated_school` varchar(50) DEFAULT NULL,
+  `third_education_profession` varchar(50) DEFAULT NULL,
+  `third_education_start` datetime DEFAULT NULL,
+  `third_education_end` datetime DEFAULT NULL,
+  `first_work_company` varchar(50) DEFAULT NULL,
+  `first_work_job` varchar(50) DEFAULT NULL,
+  `first_work_desc` varchar(100) DEFAULT NULL,
+  `first_work_start` datetime DEFAULT NULL,
+  `first_work_end` datetime DEFAULT NULL,
+  `second_work_company` varchar(50) DEFAULT NULL,
+  `second_work_job` varchar(50) DEFAULT NULL,
+  `second_work_desc` varchar(100) DEFAULT NULL,
+  `second_work_start` datetime DEFAULT NULL,
+  `second_work_end` datetime DEFAULT NULL,
+  `personal_evaluation` varchar(100) DEFAULT NULL,
+  `annex_url` varchar(50) DEFAULT NULL,
+  `updatetime` timestamp(0) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of resume
+-- ----------------------------
+
+
+-- ----------------------------
+-- Table structure for job
+-- ----------------------------
+DROP TABLE IF EXISTS `job`;
+CREATE TABLE `job` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `job_num` int(11) NOT NULL,
+  `college_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `job_title` varchar(50) NOT NULL,
+  `desc` varchar(50) NOT NULL,
+  `treatment` varchar(50) NOT NULL,
+  `job_status` int(1) DEFAULT 0,
+  `create_time` timestamp(0) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_college_id` (`college_id`),
+  CONSTRAINT `fk_college_id` FOREIGN KEY (`college_id`) REFERENCES `college` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of job
+-- ----------------------------
+
+
+-- ----------------------------
+-- Table structure for delivery_record
+-- ----------------------------
+DROP TABLE IF EXISTS `delivery_record`;
+CREATE TABLE `delivery_record` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `delivery_record_num` int(11) NOT NULL,
+  `job_seeker_id` int(11) NOT NULL,
+  `college_id` int(11) NOT NULL,
+  `resume_id` int(11) NOT NULL,
+  `job_id` int(11) NOT NULL,
+  `delivery_time` timestamp(0) NOT NULL,
+  `delivery_status` int(1) DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `fk_job_id` (`job_id`),
+  CONSTRAINT `fk_job_id` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`),
+  KEY `fk_seeker_id` (`job_seeker_id`),
+  CONSTRAINT `fk_seeker_id` FOREIGN KEY (`job_seeker_id`) REFERENCES `job_seeker` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of delivery_record
 -- ----------------------------
