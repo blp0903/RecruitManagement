@@ -5,9 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ResumeRepository extends JpaRepository<Resume,Integer> {
 
-    Resume findAdminByNum(Integer num);
+    Resume findResumeByNum(Integer num);
 
-
-    Resume findAdminByName(String name);
+    Resume findResumeByName(String name);
 
 }

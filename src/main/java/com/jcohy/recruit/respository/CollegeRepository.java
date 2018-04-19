@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CollegeRepository extends JpaRepository<College,Integer> {
 
-    College findAdminByNum(Integer num);
+    College findCollegeByNum(Integer num);
 
 
-    College findAdminByName(String name);
+    College findCollegeByName(String name);
 
 }

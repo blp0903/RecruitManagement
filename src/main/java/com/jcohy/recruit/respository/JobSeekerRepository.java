@@ -5,10 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface JobSeekerRepository extends JpaRepository<JobSeeker,Integer> {
 
-    JobSeeker findAdminByNum(Integer num);
+    JobSeeker findJobSeekerByNum(Integer num);
 
-
-    JobSeeker findAdminByName(String name);
+    JobSeeker findJobSeekerByName(String name);
 
 
 }

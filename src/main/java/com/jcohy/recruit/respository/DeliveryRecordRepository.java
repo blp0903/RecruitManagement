@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DeliveryRecordRepository extends JpaRepository<DeliveryRecord,Integer> {
 
-    DeliveryRecord findAdminByNum(Integer num);
+    DeliveryRecord findDeliveryRecordByNum(Integer num);
 
 }
