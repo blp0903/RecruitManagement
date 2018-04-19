@@ -38,8 +38,8 @@ public class ResumeServiceImpl implements ResumeService{
     }
 
     @Override
-    public void saveOrUpdate(Resume resume) throws ServiceException {
-        resumeRepository.save(resume);
+    public Resume saveOrUpdate(Resume resume) throws ServiceException {
+        return resumeRepository.save(resume);
     }
 
     @Override

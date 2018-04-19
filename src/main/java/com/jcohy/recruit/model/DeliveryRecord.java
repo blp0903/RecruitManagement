@@ -39,7 +39,7 @@ public class DeliveryRecord implements Serializable {
 
 
     @Column(name = "delivery_status")
-    private String status;
+    private Integer status;
 
     public Integer getId() {
         return id;
@@ -97,11 +97,11 @@ public class DeliveryRecord implements Serializable {
         this.deliveryTime = deliveryTime;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

@@ -20,7 +20,7 @@ public interface AdminService {
 
     /**
      * 分页查询
-     * @param Pageable
+     * @param pageable
      * @return
      */
     Page<Admin> findAll(Pageable pageable);

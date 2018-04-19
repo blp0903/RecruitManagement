@@ -20,7 +20,7 @@ public interface CollegeService {
 
     /**
      * 分页查询
-     * @param Pageable
+     * @param pageable
      * @return
      */
     Page<College> findAll(Pageable pageable);

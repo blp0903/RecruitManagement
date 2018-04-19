@@ -10,7 +10,7 @@ import java.util.List;
 public interface ResumeService {
     /**
      * 分页查询
-     * @param Pageable
+     * @param pageable
      * @return
      */
     Page<Resume> findAll(Pageable pageable);
@@ -41,7 +41,7 @@ public interface ResumeService {
      * 新增或者更新简历
      * @param resume
      */
-    void saveOrUpdate(Resume resume) throws ServiceException;
+    Resume saveOrUpdate(Resume resume) throws ServiceException;
 
 
     /**

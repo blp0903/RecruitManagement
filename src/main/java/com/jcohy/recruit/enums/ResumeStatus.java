@@ -2,8 +2,8 @@ package com.jcohy.recruit.enums;
 
 public enum ResumeStatus implements BaseEnum {
 
-    NORMAL("0","正常"),
-    DELETE("1","删除");
+    NORMAL("1","正常"),
+    DELETE("0","删除");
 
     private final String value;
     private final String cnName;

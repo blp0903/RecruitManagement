@@ -10,7 +10,7 @@ import java.util.List;
 public interface JobService {
     /**
      * 分页查询
-     * @param Pageable
+     * @param pageable
      * @return
      */
     Page<Job> findAll(Pageable pageable);
@@ -32,8 +32,9 @@ public interface JobService {
     /**
      * 新增或者更新职位
      * @param job
+     * @return
      */
-    void saveOrUpdate(Job job) throws ServiceException;
+    Job saveOrUpdate(Job job) throws ServiceException;
 
 
     /**

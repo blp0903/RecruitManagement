@@ -6,7 +6,8 @@ public enum DeliveryStatus implements BaseEnum {
     VIEWED("1","已查看"),
     NOTCOMMUNICATE("2","待沟通"),
     NOTMEETING("3", "待面试"),
-    MEETED("4", "已面试");
+    MEETED("4", "已面试"),
+    REFUSED("5", "已拒绝");
 
 
     private final String value;

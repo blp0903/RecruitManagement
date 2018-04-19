@@ -35,8 +35,13 @@ public class DeliveryRecordServiceImpl implements DeliveryRecordService {
     }
 
     @Override
-    public void saveOrUpdate(DeliveryRecord deliveryRecord) throws ServiceException {
-        deliveryRecordRepository.save(deliveryRecord);
+    public DeliveryRecord findByNum(Integer num) {
+        return deliveryRecordRepository.findDeliveryRecordByNum(num);
+    }
+
+    @Override
+    public DeliveryRecord saveOrUpdate(DeliveryRecord deliveryRecord) throws ServiceException {
+        return deliveryRecordRepository.save(deliveryRecord);
     }
 
     @Override

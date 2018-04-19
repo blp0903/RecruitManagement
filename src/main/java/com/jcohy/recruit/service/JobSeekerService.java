@@ -20,7 +20,7 @@ public interface JobSeekerService {
 
     /**
      * 分页查询
-     * @param Pageable
+     * @param pageable
      * @return
      */
     Page<JobSeeker> findAll(Pageable pageable);
@@ -51,7 +51,7 @@ public interface JobSeekerService {
      * 新增或者更新求职者
      * @param jobSeeker
      */
-    void saveOrUpdate(JobSeeker jobSeeker) throws ServiceException;
+    JobSeeker saveOrUpdate(JobSeeker jobSeeker) throws ServiceException;
 
     /**
      * 检查求职者是否存在

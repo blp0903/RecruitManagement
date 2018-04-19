@@ -11,7 +11,7 @@ public interface DeliveryRecordService {
 
     /**
      * 分页查询
-     * @param Pageable
+     * @param pageable
      * @return
      */
     Page<DeliveryRecord> findAll(Pageable pageable);
@@ -30,10 +30,18 @@ public interface DeliveryRecordService {
     DeliveryRecord findById(Integer id);
 
     /**
+     * 根据num查询
+     * @param num
+     * @return
+     */
+    DeliveryRecord findByNum(Integer num);
+
+    /**
      * 新增或者更新投递记录
      * @param deliveryRecord
+     * @return
      */
-    void saveOrUpdate(DeliveryRecord deliveryRecord) throws ServiceException;
+    DeliveryRecord saveOrUpdate(DeliveryRecord deliveryRecord) throws ServiceException;
 
     /**
      * 删除投递记录

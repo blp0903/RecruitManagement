@@ -33,8 +33,8 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void saveOrUpdate(Job job) throws ServiceException {
-        jobRepository.save(job);
+    public Job saveOrUpdate(Job job) throws ServiceException {
+        return jobRepository.save(job);
     }
 
     @Override
