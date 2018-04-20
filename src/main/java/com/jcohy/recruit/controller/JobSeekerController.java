@@ -90,7 +90,7 @@ public class JobSeekerController {
     }
 
     /**
-     * 更新学生信息
+     * 更新求职者信息
      * @param jobSeeker
      * @return
      */
@@ -137,7 +137,7 @@ public class JobSeekerController {
     /**
      * 投递job
      * @param userId  用户id
-     * @return jobId  工作id
+     * @param  jobId  工作id
      */
     @GetMapping("/send")
     public JsonResult send(Integer userId, Integer jobId){

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -44,8 +45,21 @@ public class CollegeServiceImpl implements CollegeService {
     }
 
     @Override
-    public void saveOrUpdate(College college) throws ServiceException {
-        collegeRepository.save(college);
+    public College saveOrUpdate(College college) throws ServiceException {
+        College dbUser =null;
+        if(college.getId() != null){
+            dbUser = findById(college.getId());
+            if(college.getCollegeChairman() != null ) dbUser.setCollegeChairman(college.getCollegeChairman());
+            if(college.getName() != null ) dbUser.setName(college.getName());
+            if(college.getCollegeDesc() != null ) dbUser.setCollegeDesc(college.getCollegeDesc());
+            if(college.getCollegeTel() != null ) dbUser.setCollegeTel(college.getCollegeTel());
+            if(college.getEmail() != null ) dbUser.setEmail(college.getEmail());
+            if(college.getPassword() != null ) dbUser.setPassword(college.getPassword());
+        }else{
+            dbUser = college;
+        }
+        dbUser.setUpdateTime(new Date());
+        return collegeRepository.save(dbUser);
     }
 
     @Override

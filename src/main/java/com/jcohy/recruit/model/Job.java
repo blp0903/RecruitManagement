@@ -36,7 +36,7 @@ public class Job implements Serializable {
     private String treatment;
 
     @Column(name = "job_status")
-    private String status;
+    private Integer status;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.TIMESTAMP)
@@ -99,11 +99,11 @@ public class Job implements Serializable {
         this.treatment = treatment;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

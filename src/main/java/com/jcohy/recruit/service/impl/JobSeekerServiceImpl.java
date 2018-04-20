@@ -58,7 +58,7 @@ public class JobSeekerServiceImpl implements JobSeekerService {
         }else{
             dbUser = jobSeeker;
         }
-        return jobSeekerRepository.save(jobSeeker);
+        return jobSeekerRepository.save(dbUser);
     }
 
     @Override

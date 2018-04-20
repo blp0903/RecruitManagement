@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -34,7 +35,21 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public Job saveOrUpdate(Job job) throws ServiceException {
-        return jobRepository.save(job);
+        Job dbUser = null;
+        if(job.getId() != null){
+            dbUser = findById(job.getId());
+            if(job.getCollegeId() != null ) dbUser.setCollegeId(job.getCollegeId());
+            if(job.getName() != null ) dbUser.setName(job.getName());
+            if(job.getTitle() != null ) dbUser.setTitle(job.getTitle());
+            if(job.getDesc() != null ) dbUser.setDesc(job.getDesc());
+            if(job.getNum() != null ) dbUser.setNum(job.getNum());
+            if(job.getStatus() != null ) dbUser.setStatus(job.getStatus());
+            if(job.getTreatment() != null ) dbUser.setTreatment(job.getTreatment());
+        }else{
+            dbUser = job;
+        }
+        dbUser.setCreateTime(new Date());
+        return jobRepository.save(dbUser);
     }
 
     @Override

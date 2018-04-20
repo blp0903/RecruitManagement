@@ -50,8 +50,9 @@ public interface CollegeService {
     /**
      * 新增或者更新学院
      * @param college
+     * @return
      */
-    void saveOrUpdate(College college) throws ServiceException;
+    College saveOrUpdate(College college) throws ServiceException;
 
     /**
      * 检查学院是否存在

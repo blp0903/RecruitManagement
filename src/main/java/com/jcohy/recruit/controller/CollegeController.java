@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -94,8 +95,8 @@ public class CollegeController {
     @GetMapping("/update")
     public JsonResult update(College college){
         try {
-            collegeService.saveOrUpdate(college);
-            return JsonResult.ok();
+            College coll = collegeService.saveOrUpdate(college);
+            return JsonResult.ok().set("data", coll);
         } catch (Exception e) {
             e.printStackTrace();
             return JsonResult.fail(e.getMessage());
