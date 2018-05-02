@@ -1,4 +1,4 @@
-﻿layui.use(['element', 'layer', 'util', 'form'], function () {
+﻿﻿layui.use(['element', 'layer', 'util', 'form'], function () {
     var $ = layui.jquery;
 
     //子栏目导航点击事件

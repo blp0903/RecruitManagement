@@ -41,6 +41,13 @@ public interface AdminService {
     Admin findById(Integer id);
 
     /**
+     * 根据ID查询
+     * @param num
+     * @return
+     */
+    Admin findByNum(Integer num);
+
+    /**
      * 根据name查询
      * @param name
      * @return

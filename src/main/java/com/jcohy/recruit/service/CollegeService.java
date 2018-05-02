@@ -48,6 +48,13 @@ public interface CollegeService {
     College findByName(String name);
 
     /**
+     * 根据num查询
+     * @param num
+     * @return
+     */
+    College findByNum(Integer num);
+
+    /**
      * 新增或者更新学院
      * @param college
      * @return

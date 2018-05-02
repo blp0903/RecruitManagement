@@ -45,6 +45,12 @@ public class CollegeServiceImpl implements CollegeService {
     }
 
     @Override
+    public College findByNum(Integer num) {
+        return collegeRepository.findCollegeByNum(num);
+    }
+
+
+    @Override
     public College saveOrUpdate(College college) throws ServiceException {
         College dbUser =null;
         if(college.getId() != null){

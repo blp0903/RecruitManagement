@@ -39,6 +39,11 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
+    public Admin findByNum(Integer num) {
+        return adminRepository.findAdminByNum(num);
+    }
+
+    @Override
     public Admin findByName(String name) {
         return adminRepository.findAdminByName(name);
     }
