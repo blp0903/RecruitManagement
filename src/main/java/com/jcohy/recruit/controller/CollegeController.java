@@ -119,6 +119,26 @@ public class CollegeController {
         }
     }
 
+
+    /**
+     * 更改job状态
+     * @param job
+     * @return
+     */
+    @GetMapping("/updateJob")
+    public JsonResult updateJob(Job job){
+        try {
+            Job j = jobService.saveOrUpdate(job);
+            return JsonResult.ok("更改成功").set("data", j);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.fail(e.getMessage());
+        }
+    }
+
+
+
+
     /**
      * 删除job
      * @param job

@@ -49,6 +49,17 @@ public class JobSeeker implements Serializable {
     @Column(name = "updatetime")
     private Date updateTime;
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    @Column(name = "status")
+    private Integer status;
+
     public Integer getId() {
         return id;
     }
