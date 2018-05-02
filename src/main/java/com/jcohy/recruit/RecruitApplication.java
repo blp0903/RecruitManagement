@@ -19,5 +19,8 @@ public class RecruitApplication extends WebMvcConfigurerAdapter {
 		//前台首页
 		registry.addViewController("/").setViewName("front/index");
 
+		registry.addViewController("/user/login").setViewName("front/login");
+
+		registry.addViewController("/user/register").setViewName("front/register");
 	}
 }

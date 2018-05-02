@@ -1,40 +1,8 @@
-﻿/*
-
-@Name：不落阁整站模板源码 
-@Author：Absolutely 
-@Site：http://www.lyblogs.cn
-
-*/
-
-layui.use(['element', 'layer', 'util', 'form'], function () {
+﻿layui.use(['element', 'layer', 'util', 'form'], function () {
     var $ = layui.jquery;
-    //模拟QQ登陆
-    $('.blog-user').click(function () {
-        var user = this;
-        var index = layer.load(1);
-        setTimeout(function () {
-            layer.close(index);
-            $(user).toggleClass('layui-hide').siblings('a.blog-user').toggleClass('layui-hide');
-        }, 800);
-    });
-    //分享工具
-    layui.util.fixbar({
-        bar1: '&#xe641;',
-        click: function (type) {
-            if (type === 'bar1') {
-                var sear = new RegExp('layui-hide');
-                if (sear.test($('.blog-share').attr('class'))) {
-                    shareIn();
-                } else {
-                    shareOut();
-                }
-            }
-        }
-    });
 
     //子栏目导航点击事件
     $('.child-nav span').click(function () {
-        layer.msg('切换到相应栏目');
         $(this).addClass('child-nav-btn-this').siblings().removeClass('child-nav-btn-this');
     });
 
@@ -70,23 +38,6 @@ layui.use(['element', 'layer', 'util', 'form'], function () {
         e.stopPropagation(); //阻止事件冒泡
     });
 
-    //显示百度分享
-    function shareIn() {
-        $('.blog-share').unbind('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend');
-        $('.blog-share').removeClass('shareOut');
-        $('.blog-share').addClass('shareIn');
-        $('.blog-share').removeClass('layui-hide');
-        $('.blog-share').addClass('layui-show');
-    }
-    //隐藏百度分享
-    function shareOut() {
-        $('.blog-share').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-            $('.blog-share').addClass('layui-hide');
-        });
-        $('.blog-share').removeClass('shareIn');
-        $('.blog-share').addClass('shareOut');
-        $('.blog-share').removeClass('layui-show');
-    }
     //显示侧边导航
     function leftIn() {
         $('.blog-mask').unbind('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend');
@@ -138,18 +89,109 @@ layui.use(['element', 'layer', 'util', 'form'], function () {
         $('.article-category').removeClass('categoryIn');
         $('.article-category').addClass('categoryOut');
     }
-
+    
+    $(function(){
+    	isUser();
+    	//配置背景粒子
+	    var config = {
+	        vx: 4,	//小球x轴速度,正为右，负为左
+	        vy: 4,	//小球y轴速度
+	        height: 2,	//小球高宽，其实为正方形，所以不宜太大
+	        width: 2,
+	        count: 200,		//点个数
+	        color: "121, 162, 185", 	//点颜色
+	        stroke: "130,255,255", 		//线条颜色
+	        dist: 6000, 	//点吸附距离
+	        e_dist: 20000, 	//鼠标吸附加速距离
+	        max_conn: 10 	//点到点最大连接数
+	    };
+	    //调用
+	    CanvasParticle(config);
+    });
+    
+    
+    // 退出
+    $(".user-out").click(function(){
+    	MyLocalStorage.remove("user");
+    	isUser();
+    	var url = window.location.href;
+    	if (url.indexOf("user.html")>=1) {
+    		window.location.href=_contextPath+"/login.html"
+    	}
+    });
+    
+    // 判断用户是否登陆
+    function isUser() {
+    	var user = MyLocalStorage.get("user");
+    	if (user!=null) {
+    		user = JSON.parse(user);
+    		$(".blog-user").empty();
+    		$(".blog-user").append('<a href="user.html"><img src="images'+user.img+'" alt="zuoqy" title="zuoqy" /></a>'+
+            	'<a href="user.html"><i class="fa fa-cog"></i></a>'+
+            	'<a class="user-out"><i class="fa fa-sign-out"></i></a>');
+    	} else {
+    		$(".blog-user").empty();
+    		$(".blog-user").append('<a href="login.html"><i class="fa fa-user-circle-o"></i></a>'+
+                	'<a href="login.html">登陆</a>'+
+                	'<a href="register.html">注册</a>');
+    	}
+    }
+    
+    
+    
 });
 
-
-//百度分享插件
-window._bd_share_config = {
-    "common": {
-        "bdSnsKey": {},
-        "bdText": "",
-        "bdStyle": "0",
-        "bdSize": "32"
-    },
-    "share": {}
+//定时 缓存  
+var MyLocalStorage = {                  
+	/** 
+	 * 总容量5M 
+	 * 存入缓存，支持字符串类型、json对象的存储 
+	 * 页面关闭后依然有效 ie7+都有效 
+	 * @param key 缓存key 
+	 * @param stringVal 
+	 * @time 数字 缓存有效时间（秒） 默认60s  
+	 * 注：localStorage 方法存储的数据没有时间限制。第二天、第二周或下一年之后，数据依然可用。不能控制缓存时间，故此扩展 
+	 * */  
+    put : function(key,stringVal,time){  
+        try{  
+            if(!localStorage){return false;}  
+            if(!time || isNaN(time)){time=60;}  
+            var cacheExpireDate = (new Date()-1)+time*1000;  
+            var cacheVal = {val:stringVal,exp:cacheExpireDate};  
+            localStorage.setItem(key,JSON.stringify(cacheVal));//存入缓存值  
+        }catch(e){}   
+    }, /**获取缓存*/  
+    get : function (key){  
+        try{  
+            if(!localStorage){return false;}  
+            var cacheVal = localStorage.getItem(key);  
+            var result = JSON.parse(cacheVal);  
+            var now = new Date()-1;  
+            if(!result){return null;}//缓存不存在  
+            if(now>result.exp){//缓存过期  
+                this.remove(key);                     
+                return "";  
+            }  
+            return result.val;  
+        }catch(e){  
+            this.remove(key);  
+            return null;  
+        }  
+    },/**移除缓存，一般情况不手动调用，缓存过期自动调用*/  
+    remove : function(key){  
+        if(!localStorage){return false;}  
+        localStorage.removeItem(key);  
+    },/**清空所有缓存*/  
+    clear : function(){  
+        if(!localStorage){return false;}  
+        localStorage.clear();  
+    }
 };
-with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+
+/*根据时间字符串获取date对象*/
+function formatDate(str) {
+	var strs = str.split(" ");
+	var ymd = strs[0].split("-");
+	var hms = strs[1].split(":");
+	return new Date(ymd[0],ymd[1]-1||0,ymd[2]||0,hms[0]||0,hms[1]||0,hms[2]||0);
+}
