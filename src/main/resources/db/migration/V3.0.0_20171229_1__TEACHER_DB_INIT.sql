@@ -124,7 +124,7 @@ CREATE TABLE `job` (
   `loction` varchar(50) NOT NULL,
   `numbers` varchar(20) NOT NULL,
   `work_experience` varchar(50) NOT NULL,
-  `desc` text NOT NULL,
+  `description` text NOT NULL,
   `treatment` varchar(50) NOT NULL,
   `job_status` int(1) DEFAULT 0,
   `create_time` timestamp(0) NOT NULL,
