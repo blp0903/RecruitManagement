@@ -49,6 +49,7 @@ CREATE TABLE `college` (
   `college_desc` text,
   `password` varchar(50) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
+  `status` int(1) DEFAULT 0,
   `updatetime` timestamp(0) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -71,6 +72,7 @@ CREATE TABLE `job_seeker` (
   `password` varchar(50) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
   `resume_id` int(11) DEFAULT NULL,
+  `status` int(1) DEFAULT 0,
   `updatetime` timestamp(0) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_resume_id` (`resume_id`),
