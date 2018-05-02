@@ -62,7 +62,7 @@ public class Job implements Serializable {
     @Column(name = "work_experience")
     private String experience;
 
-    @Column(name = "desc")
+    @Column(name = "description")
     private String desc;
 
     @Column(name = "treatment")
