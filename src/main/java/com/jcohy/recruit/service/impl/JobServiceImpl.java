@@ -45,6 +45,9 @@ public class JobServiceImpl implements JobService {
             if(job.getNum() != null ) dbUser.setNum(job.getNum());
             if(job.getStatus() != null ) dbUser.setStatus(job.getStatus());
             if(job.getTreatment() != null ) dbUser.setTreatment(job.getTreatment());
+            if(job.getLocation() != null ) dbUser.setLocation(job.getLocation());
+            if(job.getNumbers() != null ) dbUser.setNumbers(job.getNumbers());
+            if(job.getExperience() != null ) dbUser.setExperience(job.getExperience());
         }else{
             dbUser = job;
         }

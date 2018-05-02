@@ -29,6 +29,39 @@ public class Job implements Serializable {
     @Column(name = "job_title")
     private String title;
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getNumbers() {
+        return numbers;
+    }
+
+    public void setNumbers(String numbers) {
+        this.numbers = numbers;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+    @Column(name = "loction")
+    private String location;
+
+    @Column(name = "numbers")
+    private String numbers;
+
+    @Column(name = "work_experience")
+    private String experience;
+
     @Column(name = "desc")
     private String desc;
 
