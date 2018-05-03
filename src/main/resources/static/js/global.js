@@ -1,4 +1,4 @@
-﻿﻿layui.use(['element', 'layer', 'util', 'form'], function () {
+﻿layui.use(['element', 'layer', 'util', 'form'], function () {
     var $ = layui.jquery;
 
     //子栏目导航点击事件
@@ -21,7 +21,6 @@
     });
     //blog-body和blog-footer点击事件，用来关闭百度分享和类别导航
     $('.blog-body,.blog-footer').click(function () {
-        shareOut();
         categoryOut();
     });
     //类别导航开关点击事件
@@ -126,14 +125,14 @@
     	if (user!=null) {
     		user = JSON.parse(user);
     		$(".blog-user").empty();
-    		$(".blog-user").append('<a href="user.html"><img src="images'+user.img+'" alt="zuoqy" title="zuoqy" /></a>'+
-            	'<a href="user.html"><i class="fa fa-cog"></i></a>'+
+    		$(".blog-user").append('<a href="user/info"><img src="images/login.png" alt="" title="" /></a>'+
+            	'<a href="user/info"><i class="fa fa-cog"></i></a>'+
             	'<a class="user-out"><i class="fa fa-sign-out"></i></a>');
     	} else {
     		$(".blog-user").empty();
-    		$(".blog-user").append('<a href="login.html"><i class="fa fa-user-circle-o"></i></a>'+
-                	'<a href="login.html">登陆</a>'+
-                	'<a href="register.html">注册</a>');
+    		$(".blog-user").append('<a href="/user/login"><i class="fa fa-user-circle-o"></i></a>'+
+                	'<a href="/user/login">登陆</a>'+
+                	'<a href="/user/register">注册</a>');
     	}
     }
     

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; Charset=utf-8">
@@ -21,23 +21,18 @@
     <nav class="blog-nav layui-header">
         <div class="blog-container">
             <!-- 用户登陆 -->
+
 			<a class="blog-logo" href="/">大学生招聘网站</a>
             <!-- 导航菜单 -->
+            <div class="blog-user"></div>
+
 			<ul class="layui-nav" lay-filter="nav">
 				<li class="layui-nav-item layui-this">
-					<a href="home.html"><i class="fa fa-home fa-fw"></i>&nbsp;招聘信息</a>
+					<a href="/"><i class="fa fa-home fa-fw"></i>&nbsp;招聘信息</a>
 				</li>
 
 				<li class="layui-nav-item">
 					<a href="resource.ftl"><i class="fa fa-tags fa-fw"></i>&nbsp;个人中心</a>
-				</li>
-
-				<li class="layui-nav-item">
-					<a href="/user/login">登录</a>
-				</li>
-
-				<li class="layui-nav-item">
-					<a href="/user/register">注册</a>
 				</li>
 			</ul>
 			<!-- 手机和平板的导航开关 -->
@@ -63,9 +58,7 @@
                 <div class="home-tips shadow">
                     <i style="float:left;line-height:17px;" class="fa fa-volume-up"></i>
                     <div class="home-tips-container">
-                        <span style="color: red">新功能vip视频解析上线了！！！<a href="mixed_vip.html" target="_blank" style="color:#01AAED">去围观</a></span>
                         <span style="color: #009688">有事做有所期待，日子就是幸福的</span>
-                        <span style="color: red">如果你觉得网站做得还不错，来Fly社区点个赞吧！<a href="http://fly.layui.com/case/2017/" target="_blank" style="color:#01AAED">点我前往</a></span>
                         <span style="color: #009688">用心每一天，不忘初心，方能走远</span>
                         <span style="color: #009688">偷偷挤进一缕斜阳，送来满满幸福</span>
                     </div>
@@ -96,102 +89,38 @@
 							<!--<span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>-->
 						</div>
                 	</div>
-					<div class="article shadow animated fadeInLeft">
-						<div class="article-right">
-							<div class="article-title">
-								<a href="/user/detail">职位名称：JAVA开发工程师</a>
-							</div>
-							<div class="article-abstract">
-								公司名称：百度
-							</div>
-							<div class="article-abstract">
-								薪资：8000/月
-							</div>
-							<div class="article-abstract">
-								地点：北京市大兴区
-							</div>
-						</div>
-						<div class="clear"></div>
-						<div class="article-footer">
-							<span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-03-18</span>
-							<span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
-							<span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">Web前端</a></span>
-							<!--<span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>-->
-							<!--<span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>-->
-						</div>
-					</div>
-					<div class="article shadow animated fadeInLeft">
-						<div class="article-right">
-							<div class="article-title">
-								<a href="/user/detail">职位名称：JAVA开发工程师</a>
-							</div>
-							<div class="article-abstract">
-								公司名称：百度
-							</div>
-							<div class="article-abstract">
-								薪资：8000/月
-							</div>
-							<div class="article-abstract">
-								地点：北京市大兴区
-							</div>
-						</div>
-						<div class="clear"></div>
-						<div class="article-footer">
-							<span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-03-18</span>
-							<span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
-							<span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">Web前端</a></span>
-							<!--<span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>-->
-							<!--<span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>-->
-						</div>
-					</div>
-					<div class="article shadow animated fadeInLeft">
-						<div class="article-right">
-							<div class="article-title">
-								<a href="/user/detail">职位名称：JAVA开发工程师</a>
-							</div>
-							<div class="article-abstract">
-								公司名称：百度
-							</div>
-							<div class="article-abstract">
-								薪资：8000/月
-							</div>
-							<div class="article-abstract">
-								地点：北京市大兴区
-							</div>
-						</div>
-						<div class="clear"></div>
-						<div class="article-footer">
-							<span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-03-18</span>
-							<span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
-							<span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">Web前端</a></span>
-							<!--<span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>-->
-							<!--<span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>-->
-						</div>
-					</div>
-					<div class="article shadow animated fadeInLeft">
-						<div class="article-right">
-							<div class="article-title">
-								<a href="/user/detail">职位名称：JAVA开发工程师</a>
-							</div>
-							<div class="article-abstract">
-								公司名称：百度
-							</div>
-							<div class="article-abstract">
-								薪资：8000/月
-							</div>
-							<div class="article-abstract">
-								地点：北京市大兴区
-							</div>
-						</div>
-						<div class="clear"></div>
-						<div class="article-footer">
-							<span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-03-18</span>
-							<span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
-							<span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">Web前端</a></span>
-							<!--<span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>-->
-							<!--<span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>-->
-						</div>
-					</div>
+					<@jobList>
+						<#list list as x>
+							<div class="article shadow animated fadeInLeft">
+                                <div class="article-left ">
+                                    <img src="${ctx!}/images/01.jpg" alt="${x.name}"/>
+                                </div>
+
+                                <div class="article-right">
+                                    <div class="article-title">
+                                        <a href="/job/${x.id}">职位名称：${x.name}</a>
+                                    </div>
+                                    <div class="article-abstract">
+                                        公司名称：${x.college.name}
+                                    </div>
+                                    <div class="article-abstract">
+                                        薪资：${x.treatment}/月
+                                    </div>
+                                    <div class="article-abstract">
+                                        地点：${x.location}
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="article-footer">
+                                    <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;${x.createTime}</span>
+                                    <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;${x.title}</span>
+                                    <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">${x.experience}</a></span>
+                                    <!--<span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>-->
+                                    <!--<span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>-->
+                                </div>
+                            </div>
+						</#list>
+					</@jobList>
                 </div>
                 <!--右边小栏目-->
                 <div class="blog-main-right">
@@ -243,7 +172,7 @@
     <!--侧边导航-->
     <ul class="layui-nav layui-nav-tree layui-nav-side blog-nav-left layui-hide" lay-filter="nav">
 		<li class="layui-nav-item layui-this">
-			<a href="home.html"><i class="fa fa-home fa-fw"></i>&nbsp;招聘信息</a>
+			<a href="/"><i class="fa fa-home fa-fw"></i>&nbsp;招聘信息</a>
 		</li>
 
 		<li class="layui-nav-item">

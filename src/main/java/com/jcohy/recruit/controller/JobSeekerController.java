@@ -12,6 +12,7 @@ import com.jcohy.recruit.service.JobService;
 import com.jcohy.recruit.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -71,7 +72,7 @@ public class JobSeekerController {
      * @param name 姓名 必填
      * @return
      */
-    @GetMapping("/register")
+    @PostMapping("/register")
     public JsonResult register(Integer num, String phone, String password, String name){
         if(num == null||phone == null || StringUtils.hashEmpty(name,password)){
             return JsonResult.fail("参数不能为空");
