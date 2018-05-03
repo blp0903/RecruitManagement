@@ -55,8 +55,8 @@
                     <li class="layui-nav-item">
                         <a href="javascript:;"><i class="fa fa-user"></i>学院管理</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" data-url="${ctx!}/admin/lab/index" data-id="1">新增学院账户</a></dd>
-                            <dd><a href="javascript:;" data-url="${ctx!}/admin/plan/index" data-id="2">学院账户管理</a></dd>
+                            <dd><a href="javascript:;" data-url="${ctx!}/admin/addcollege/index" data-id="3">新增学院账户</a></dd>
+                            <dd><a href="javascript:;" data-url="${ctx!}/admin/college/index" data-id="4">学院账户管理</a></dd>
                         </dl>
                     </li>
                 </ul>

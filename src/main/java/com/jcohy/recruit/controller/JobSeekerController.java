@@ -23,7 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/jobSeeker")
-public class JobSeekerController {
+public class JobSeekerController extends BaseController{
 
     @Autowired
     private JobSeekerService jobSeekerService;

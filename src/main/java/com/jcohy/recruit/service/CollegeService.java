@@ -82,5 +82,5 @@ public interface CollegeService {
      * @param password1
      * @param password2
      */
-    void updatePassword(College college, String oldpassword, String password1, String password2);
+    void updatePassword(College college);
 }

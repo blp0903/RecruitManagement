@@ -7,17 +7,17 @@ layui.define([ 'layer',  'table','common'], function (exports) {
         elem: '#plan'
         ,height: 'full-200'
         ,method:'GET'
-        ,url: '/admin/plan/list' //数据接口
+        ,url: '/college/list' //数据接口
         ,page: true //开启分页
         ,cols: [[ //表头
-            {field: 'num', align:'center', title: '实验编号',unresize:true,templet: '<div>{{d.lab.num}}</div>'}
-            ,{field: 'name', align:'center', title: '实验主题',unresize:true,templet: '<div>{{d.lab.name}}</div>'}
-            ,{field: 'content', align:'center', title: '实验内容',unresize:true,templet: '<div>{{d.lab.content}}</div>'}
-            ,{field: 'type', align:'center', title: '类型',unresize:true,templet: '<div>{{d.lab.type}}</div>'}
-            ,{field: 'dept', align:'center', title: '院系',unresize:true,templet: '<div>{{d.dept.name}}</div>'}
-            ,{field: 'major', align:'center', title: '专业',unresize:true,templet: '<div>{{d.major.name}}</div>'}
-            ,{field: 'start', align:'center', title: '开始时间',unresize:true}
-            ,{field: 'end', align:'center', title: '结束时间',unresize:true}
+            {field: 'num', align:'center', title: '学院编号',unresize:true,templet: '<div>{{d.college.num}}</div>'}
+            ,{field: 'name', align:'center', title: '学院名',unresize:true,templet: '<div>{{d.college.name}}</div>'}
+            ,{field: 'collegeDesc', align:'center', title: '学院描述',unresize:true,templet: '<div>{{d.college.collegeDesc}}</div>'}
+            ,{field: 'collegeChairman', align:'center', title: '院长',unresize:true,templet: '<div>{{d.college.collegeChairman}}</div>'}
+            ,{field: 'collegeTel', align:'center', title: '电话',unresize:true,templet: '<div>{{d.college.collegeTel}}</div>'}
+            ,{field: 'email', align:'center', title: '邮箱',unresize:true,templet: '<div>{{d.college.email}}</div>'}
+            ,{field: 'updateTime', align:'center', title: '更新时间',unresize:true}
+            ,{field: 'status', align:'center', title: '状态',unresize:true,templet: '<div>{{d.college.status}}</div>'}
             ,{fixed: 'right',  title:'操作',align:'center', toolbar: '#operator',unresize:true}
         ]]
     });
@@ -30,16 +30,6 @@ layui.define([ 'layer',  'table','common'], function (exports) {
         } else if(obj.event === 'edit'){
             common.frame_show('编辑','/admin/plan/form?id='+data.id);
         }
-    });
-
-    //添加数据
-    $('#addReport').click(function () {
-        var index = layer.load(1);
-        setTimeout(function () {
-            layer.close(index);
-            common.frame_show('添加','/admin/plan/form');
-            // layer.msg('打开添加窗口');
-        }, 500);
     });
 
 
@@ -61,14 +51,14 @@ layui.define([ 'layer',  'table','common'], function (exports) {
     function del(id) {
         layer.confirm('真的删除行么', function (index) {
             $.ajax({
-                type: "DELETE",
+                type: "GET",
                 dataType: "json",
-                url: "/admin/plan/" + id + "/del",
+                url: "/admin/deleteCollege/?id=" + id,
                 success: function (ret) {
                     if (ret.isOk) {
                         layer.msg("操作成功", {time: 2000}, function () {
                             layer.close(index);
-                            window.location.href = "/admin/plan/index";
+                            window.location.href = "/admin/college/index";
                         });
                     } else {
                         layer.msg(ret.msg, {time: 2000});
@@ -77,5 +67,5 @@ layui.define([ 'layer',  'table','common'], function (exports) {
             });
         });
     }
-    exports('admin/plan/index', datalist);
+    exports('admin/college/index', datalist);
 });

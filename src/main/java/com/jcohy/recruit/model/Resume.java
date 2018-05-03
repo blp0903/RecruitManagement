@@ -16,24 +16,31 @@ public class Resume implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    //简历编号传对应的用户id
     @Column(name = "resume_num")
     private Integer num;
 
+    //简历状态
     @Column(name = "resume_status")
     private Integer status;
 
+    //姓名
     @Column(name = "name")
     private String name;
 
+    //电话
     @Column(name = "phone")
     private String phone;
 
+    //身份证号
     @Column(name = "id_no")
     private String idNo;
 
+    //性别
     @Column(name = "sex")
     private String sex;
 
+    //年龄
     @Column(name = "age")
     private Integer age;
 
@@ -42,21 +49,30 @@ public class Resume implements Serializable {
     @Column(name = "birth")
     private Date birth;
 
+    //邮箱
     @Column(name = "email")
     private String email;
 
+
+    //教育经历
     @Column(name = "education_experience")
     private String education;
 
+
+    //工作经历
     @Column(name = "work_experience")
     private String work;
 
+    //个人评价
     @Column(name = "personal_evaluation")
     private String personal;
 
+    //附件地址
     @Column(name = "annex_url")
     private String annexUrl;
 
+
+    //更新时间
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updatetime")

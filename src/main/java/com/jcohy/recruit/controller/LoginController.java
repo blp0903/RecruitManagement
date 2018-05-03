@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  * Description  :登录模块处理
  */
 @Controller
-public class LoginController {
+public class LoginController extends BaseController{
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
     @Autowired
@@ -91,7 +91,7 @@ public class LoginController {
 
 
 
-    @PostMapping("/admin/update/")
+    @PostMapping("/admin/update")
     @ResponseBody
     public JsonResult updatePassword(@SessionAttribute("role") String role,@RequestParam Integer num,@RequestParam String oldPassword, @RequestParam String newPassword,
                                  @RequestParam String rePassword, ModelMap map){
@@ -111,17 +111,20 @@ public class LoginController {
                 return JsonResult.fail("旧密码不正确");
             }
             dbUser.setPassword(newPassword);
-            collegeService.updatePassword(dbUser, oldPassword, newPassword, newPassword);
+            collegeService.updatePassword(dbUser);
         }else if(role.equals("admin")){
             Admin dbUser = adminService.findByNum(num);
             if(!dbUser.getPassword().equals(oldPassword)){
                 return JsonResult.fail("旧密码不正确");
             }
             dbUser.setPassword(newPassword);
-            adminService.updatePassword(dbUser, oldPassword, newPassword, newPassword);
+            adminService.updatePassword(dbUser);
         }
         return JsonResult.ok();
     }
 
-
+    @GetMapping("/admin/update")
+    public String updatePassword(){
+        return "update";
+    }
 }

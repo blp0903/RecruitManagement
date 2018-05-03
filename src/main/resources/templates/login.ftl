@@ -27,7 +27,7 @@
         <h1>西安工业大学招聘管理系统后台管理系统</h1>
         <form class="layui-form" action="${ctx!}/login" method="post">
             <div class="layui-form-item">
-                <input type="text" name="num" lay-verify="number" placeholder="请输入学号或者帐号" autocomplete="off"  value="" class="layui-input">
+                <input type="text" name="num" lay-verify="number" placeholder="请输入帐号" autocomplete="off"  value="" class="layui-input">
             </div>
             <div class="layui-form-item">
                 <input type="password" name="password" lay-verify="required" placeholder="请输入密码" autocomplete="off" value="" class="layui-input">

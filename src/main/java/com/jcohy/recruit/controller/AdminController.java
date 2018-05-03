@@ -24,7 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminController extends BaseController{
 
     @Autowired
     private AdminService adminService;

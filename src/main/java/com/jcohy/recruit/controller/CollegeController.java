@@ -2,15 +2,17 @@ package com.jcohy.recruit.controller;
 
 import com.jcohy.lang.StringUtils;
 import com.jcohy.recruit.common.JsonResult;
+import com.jcohy.recruit.common.PageJson;
 import com.jcohy.recruit.model.*;
 import com.jcohy.recruit.service.CollegeService;
 import com.jcohy.recruit.service.DeliveryRecordService;
 import com.jcohy.recruit.service.JobService;
 import com.jcohy.recruit.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/college")
-public class CollegeController {
+public class CollegeController extends BaseController{
 
     @Autowired
     private CollegeService collegeService;
@@ -92,7 +94,8 @@ public class CollegeController {
      * @param college
      * @return
      */
-    @GetMapping("/update")
+    @PostMapping("/update")
+    @ResponseBody
     public JsonResult update(College college){
         try {
             College coll = collegeService.saveOrUpdate(college);
@@ -102,6 +105,8 @@ public class CollegeController {
             return JsonResult.fail(e.getMessage());
         }
     }
+
+
 
     /**
      * 发布job
@@ -119,6 +124,36 @@ public class CollegeController {
         }
     }
 
+
+    /**
+     * 获取全部college
+     * @param
+     * @return
+     */
+    @GetMapping("/getAll")
+    public JsonResult getAll(){
+        try {
+            List<College> list = collegeService.findAll();
+            return JsonResult.ok().set("data", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.fail(e.getMessage());
+        }
+    }
+
+
+    @GetMapping("/list")
+    @ResponseBody
+    public PageJson<College> all(@SessionAttribute("user")Admin teacher, ModelMap map){
+        PageRequest pageRequest = getPageRequest();
+        Page<College> plans = collegeService.findAll(pageRequest);
+        PageJson<College> page = new PageJson<>();
+        page.setCode(0);
+        page.setMsg("成功");
+        page.setCount(plans.getSize());
+        page.setData(plans.getContent());
+        return page;
+    }
 
     /**
      * 更改job状态
