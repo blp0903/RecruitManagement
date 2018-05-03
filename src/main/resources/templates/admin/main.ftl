@@ -51,6 +51,14 @@
                             <dd><a href="javascript:;" data-url="${ctx!}/admin/plan/index" data-id="2">求职者简历管理</a></dd>
                         </dl>
                     </li>
+
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="fa fa-user"></i>学院管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" data-url="${ctx!}/admin/lab/index" data-id="1">新增学院账户</a></dd>
+                            <dd><a href="javascript:;" data-url="${ctx!}/admin/plan/index" data-id="2">学院账户管理</a></dd>
+                        </dl>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -78,7 +86,7 @@
         </div>
         <!--底部信息-->
         <div class="layui-footer">
-            <p style="line-height:44px;text-align:center;">Copyright © 2017 - PT. All Rights Reserved</p>
+            <p style="line-height:44px;text-align:center;">Copyright © 2018 - RM. All Rights Reserved</p>
         </div>
 
     <script src="${ctx!}/js/plugins/layui/layui.js"></script>
