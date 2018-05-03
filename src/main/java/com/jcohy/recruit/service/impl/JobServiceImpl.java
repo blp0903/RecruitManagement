@@ -38,7 +38,7 @@ public class JobServiceImpl implements JobService {
         Job dbUser = null;
         if(job.getId() != null){
             dbUser = findById(job.getId());
-            if(job.getCollegeId() != null ) dbUser.setCollegeId(job.getCollegeId());
+            if(job.getCollege() != null ) dbUser.setCollege(job.getCollege());
             if(job.getName() != null ) dbUser.setName(job.getName());
             if(job.getTitle() != null ) dbUser.setTitle(job.getTitle());
             if(job.getDesc() != null ) dbUser.setDesc(job.getDesc());

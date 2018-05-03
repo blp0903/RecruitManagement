@@ -22,6 +22,13 @@ public interface DeliveryRecordService {
      */
     List<DeliveryRecord> findAll();
 
+
+    /**
+     *  查询
+     * @return
+     */
+    List<DeliveryRecord> findListByNum(Integer num);
+
     /**
      * 根据ID查询
      * @param id

@@ -41,8 +41,18 @@ public class JobSeeker implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "resume_id")
-    private Integer resumeId;
+
+    public Resume getResume() {
+        return resume;
+    }
+
+    public void setResume(Resume resume) {
+        this.resume = resume;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.TIMESTAMP)
@@ -122,14 +132,6 @@ public class JobSeeker implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Integer getResumeId() {
-        return resumeId;
-    }
-
-    public void setResumeId(Integer resumeId) {
-        this.resumeId = resumeId;
     }
 
     public Date getUpdateTime() {

@@ -20,8 +20,9 @@ public class DeliveryRecord implements Serializable {
     @Column(name = "delivery_record_num")
     private Integer num;
 
-    @Column(name = "job_seeker_id")
-    private Integer jobSeekerId;
+    @OneToOne
+    @JoinColumn(name = "job_seeker_id")
+    private JobSeeker jobSeeker;
 
     @Column(name = "college_id")
     private Integer collegeId;
@@ -29,8 +30,25 @@ public class DeliveryRecord implements Serializable {
     @Column(name = "resume_id")
     private Integer resumeId;
 
-    @Column(name = "job_id")
-    private Integer jobId;
+    public JobSeeker getJobSeeker() {
+        return jobSeeker;
+    }
+
+    public void setJobSeeker(JobSeeker jobSeeker) {
+        this.jobSeeker = jobSeeker;
+    }
+
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "job_id")
+    private Job job;
 
     //投递时间
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -57,13 +75,6 @@ public class DeliveryRecord implements Serializable {
         this.num = num;
     }
 
-    public Integer getJobSeekerId() {
-        return jobSeekerId;
-    }
-
-    public void setJobSeekerId(Integer jobSeekerId) {
-        this.jobSeekerId = jobSeekerId;
-    }
 
     public Integer getCollegeId() {
         return collegeId;
@@ -81,13 +92,6 @@ public class DeliveryRecord implements Serializable {
         this.resumeId = resumeId;
     }
 
-    public Integer getJobId() {
-        return jobId;
-    }
-
-    public void setJobId(Integer jobId) {
-        this.jobId = jobId;
-    }
 
     public Date getDeliveryTime() {
         return deliveryTime;

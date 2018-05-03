@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -108,18 +109,18 @@ public class JobSeekerController {
 
     /**
      * 增加简历
+     *
      * @param resume
      * @return
      */
     @GetMapping("/addResume")
-    public JsonResult addResume(Resume resume){
+    public JsonResult addResume(Resume resume) {
         try {
             Resume res = resumeService.saveOrUpdate(resume);
-            Resume res1 = resumeService.findByName(resume.getName());
-            JobSeeker jobSeeker = new JobSeeker();
-            jobSeeker.setResumeId(res1.getId());
-            jobSeekerService.saveOrUpdate(jobSeeker);
-            return JsonResult.ok("添加成功").set("data", res);
+            JobSeeker jobSeeker = jobSeekerService.findByNum(res.getNum());
+            jobSeeker.setResume(res);
+            jobSeeker = jobSeekerService.saveOrUpdate(jobSeeker);
+            return JsonResult.ok("添加成功").set("data", res).set("data", jobSeeker);
         } catch (Exception e) {
             e.printStackTrace();
             return JsonResult.fail(e.getMessage());
@@ -148,14 +149,14 @@ public class JobSeekerController {
         try {
             JobSeeker jobSeeker = jobSeekerService.findById(userId);
             Job job = jobService.findById(jobId);
-            if (jobSeeker.getResumeId() == null) {
+            if (jobSeeker.getResume() == null) {
                 return JsonResult.fail("还没有简历，先去添加一份简历吧！");
             }
             DeliveryRecord deliveryRecord = new DeliveryRecord();
-            deliveryRecord.setCollegeId(job.getCollegeId());
-            deliveryRecord.setJobSeekerId(jobSeeker.getId());
-            deliveryRecord.setResumeId(jobSeeker.getResumeId());
-            deliveryRecord.setJobId(job.getId());
+            deliveryRecord.setCollegeId(job.getCollege().getId());
+            deliveryRecord.setJobSeeker(jobSeeker);
+            deliveryRecord.setResumeId(jobSeeker.getResume().getId());
+            deliveryRecord.setJob(job);
             deliveryRecord.setNum(jobSeeker.getId());
             Date date = new Date();
             deliveryRecord.setDeliveryTime(date);
@@ -174,9 +175,9 @@ public class JobSeekerController {
      */
     @GetMapping("/deliveryRecord")
     public JsonResult findSend(Integer userId){
-        DeliveryRecord deliveryRecord = new DeliveryRecord();
-        deliveryRecord = deliveryRecordService.findByNum(userId);
-        return JsonResult.ok("获取成功").set("data",deliveryRecord);
+        List<DeliveryRecord> list = new ArrayList<>();
+        list = deliveryRecordService.findListByNum(userId);
+        return JsonResult.ok("获取成功").set("data",list);
     }
 
 

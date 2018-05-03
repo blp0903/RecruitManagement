@@ -165,7 +165,9 @@ public class CollegeController {
         List<DeliveryRecord> all = deliveryRecordService.findAll();
         List<DeliveryRecord> mine = new ArrayList<>();
         for (DeliveryRecord deliveryRecord : all) {
-            if (deliveryRecord.getCollegeId().equals("id") && !deliveryRecord.getStatus().equals("5")) {
+            if (deliveryRecord.getJob().getCollege().getId() == id ) {
+                if (deliveryRecord.getStatus()!=null&&!deliveryRecord.getStatus().equals("5"))
+                    break;
                 mine.add(deliveryRecord);
             }
         }

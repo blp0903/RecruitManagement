@@ -44,13 +44,19 @@ public class JobSeekerServiceImpl implements JobSeekerService {
     }
 
     @Override
+    public JobSeeker findByNum(Integer num) {
+        return jobSeekerRepository.findJobSeekerByNum(num);
+    }
+
+
+    @Override
     public JobSeeker saveOrUpdate(JobSeeker jobSeeker) throws ServiceException {
         JobSeeker dbUser =null;
         if(jobSeeker.getId() != null){
             dbUser = findById(jobSeeker.getId());
             if(jobSeeker.getBirth() != null ) dbUser.setBirth(jobSeeker.getBirth());
             if(jobSeeker.getName() != null ) dbUser.setName(jobSeeker.getName());
-            if(jobSeeker.getResumeId() != null ) dbUser.setResumeId(jobSeeker.getResumeId());
+            if(jobSeeker.getResume() != null ) dbUser.setResume(jobSeeker.getResume());
             if(jobSeeker.getSex() != null ) dbUser.setSex(jobSeeker.getSex());
             if(jobSeeker.getEmail() != null ) dbUser.setEmail(jobSeeker.getEmail());
             if(jobSeeker.getPhone() != null ) dbUser.setPhone(jobSeeker.getPhone());

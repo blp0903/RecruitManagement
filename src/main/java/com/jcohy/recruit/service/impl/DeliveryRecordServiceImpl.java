@@ -30,6 +30,11 @@ public class DeliveryRecordServiceImpl implements DeliveryRecordService {
     }
 
     @Override
+    public List<DeliveryRecord> findListByNum(Integer num) {
+        return deliveryRecordRepository.findDeliveryListRecordByNum(num);
+    }
+
+    @Override
     public DeliveryRecord findById(Integer id) {
         return deliveryRecordRepository.findById(id).get();
     }

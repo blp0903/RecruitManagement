@@ -20,8 +20,18 @@ public class Job implements Serializable {
     @Column(name = "job_num")
     private Integer num;
 
-    @Column(name = "college_id")
-    private Integer collegeId;
+
+    public College getCollege() {
+        return college;
+    }
+
+    public void setCollege(College college) {
+        this.college = college;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "college_id")
+    private College college;
 
     @Column(name = "name")
     private String name;
@@ -90,14 +100,6 @@ public class Job implements Serializable {
 
     public void setNum(Integer num) {
         this.num = num;
-    }
-
-    public Integer getCollegeId() {
-        return collegeId;
-    }
-
-    public void setCollegeId(Integer collegeId) {
-        this.collegeId = collegeId;
     }
 
     public String getName() {

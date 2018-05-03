@@ -47,6 +47,15 @@ public interface JobSeekerService {
      */
     JobSeeker findByName(String name);
 
+
+
+    /**
+     * 根据num查询
+     * @param num
+     * @return
+     */
+    JobSeeker findByNum(Integer num);
+
     /**
      * 新增或者更新求职者
      * @param jobSeeker
