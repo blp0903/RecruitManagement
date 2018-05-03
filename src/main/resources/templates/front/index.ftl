@@ -32,7 +32,7 @@
 				</li>
 
 				<li class="layui-nav-item">
-					<a href="resource.ftl"><i class="fa fa-tags fa-fw"></i>&nbsp;个人中心</a>
+					<a href="/user/index"><i class="fa fa-tags fa-fw"></i>&nbsp;个人中心</a>
 				</li>
 			</ul>
 			<!-- 手机和平板的导航开关 -->
@@ -65,30 +65,6 @@
                 </div>
                 <!--左边文章列表-->
                 <div class="blog-main-left animated slideInLeft">
-                	<div class="article shadow animated fadeInLeft">
-						<div class="article-right">
-							<div class="article-title">
-								<a href="/user/detail">职位名称：JAVA开发工程师</a>
-							</div>
-							<div class="article-abstract">
-								公司名称：百度
-							</div>
-							<div class="article-abstract">
-								薪资：8000/月
-							</div>
-							<div class="article-abstract">
-								地点：北京市大兴区
-							</div>
-						</div>
-						<div class="clear"></div>
-						<div class="article-footer">
-							<span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-03-18</span>
-							<span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
-							<span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">Web前端</a></span>
-							<!--<span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>-->
-							<!--<span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>-->
-						</div>
-                	</div>
 					<@jobList>
 						<#list list as x>
 							<div class="article shadow animated fadeInLeft">
@@ -176,7 +152,7 @@
 		</li>
 
 		<li class="layui-nav-item">
-			<a href="resource.ftl"><i class="fa fa-tags fa-fw"></i>&nbsp;个人中心</a>
+			<a href="/user/index"><i class="fa fa-tags fa-fw"></i>&nbsp;个人中心</a>
 		</li>
     </ul>
 

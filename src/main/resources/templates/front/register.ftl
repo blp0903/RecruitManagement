@@ -27,7 +27,7 @@
 				</li>
 
 				<li class="layui-nav-item">
-					<a href="resource.ftl"><i class="fa fa-tags fa-fw"></i>&nbsp;个人中心</a>
+					<a href="/user/index"><i class="fa fa-tags fa-fw"></i>&nbsp;个人中心</a>
 				</li>
             </ul>
             <!-- 手机和平板的导航开关 -->
@@ -133,7 +133,7 @@
 		</li>
 
 		<li class="layui-nav-item">
-			<a href="resource.ftl"><i class="fa fa-tags fa-fw"></i>&nbsp;个人中心</a>
+			<a href="/user/index"><i class="fa fa-tags fa-fw"></i>&nbsp;个人中心</a>
 		</li>
     </ul>
 

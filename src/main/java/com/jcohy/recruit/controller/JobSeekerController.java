@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +45,7 @@ public class JobSeekerController {
      * @return
      */
     @GetMapping("/login")
-    public JsonResult login(Integer num, String password){
+    public JsonResult login(HttpServletRequest request,Integer num, String password){
         JobSeeker login = null;
         try {
             if(num == null || StringUtils.isEmpty(password)){
@@ -62,6 +63,7 @@ public class JobSeekerController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        request.getSession().setAttribute("user",login);
         return JsonResult.ok("登录成功").set("data",login);
     }
 
