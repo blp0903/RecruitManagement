@@ -54,9 +54,9 @@
 						<div class="layui-tab-item">
 					    	<form class="layui-form layui-form-pane" method="post">
 					    		<div class="layui-form-item">
-								    <label class="layui-form-label">邮箱</label>
+								    <label class="layui-form-label">帐号</label>
 							    	<div class="layui-input-inline">
-							        	<input type="text" name="email" required  lay-verify="email" autocomplete="off" class="layui-input">
+							        	<input type="text" name="num" required  lay-verify="num" autocomplete="off" class="layui-input">
 							        </div>
 							    </div>
 							    <div class="layui-form-item">
@@ -64,35 +64,26 @@
 								    <div class="layui-input-inline">
 								      <input type="password" name="pwd" required lay-verify="required" autocomplete="off" class="layui-input">
 								    </div>
-							  </div>
-							  	<div class="layui-form-item">
-								    <label class="layui-form-label">人类验证</label>
-								    <div class="layui-input-inline">
-								      <input type="text" name="verify" required lay-verify="required" autocomplete="off" placeholder="请回答后面问题" class="layui-input">
-								    </div>
-								    <div class="layui-form-mid">
-								    	<span style="color:#c00" class="verift-text"></span>
-								    </div>
-							    </div>
+							  	</div>
 						        <div class="layui-form-item">
 								    <button class="layui-btn" lay-submit lay-filter="loginForm">立即登陆</button>
-								    <span style="padding-left: 20px">
-								    	<a href="javascript:forgetPwd()">忘记密码?</a>
-								    </span>
+								    <#--<span style="padding-left: 20px">-->
+								    	<#--<a href="javascript:forgetPwd()">忘记密码?</a>-->
+								    <#--</span>-->
 							    </div>
 							</form>
 				    	</div>
 		    			<div class="layui-tab-item layui-show">
 		    				<form class="layui-form layui-form-pane" method="post">
 					    		<div class="layui-form-item">
-								    <label class="layui-form-label">邮箱</label>
+								    <label class="layui-form-label">帐号</label>
 							    	<div class="layui-input-inline">
-							        	<input type="email" name="email" required  lay-verify="email" autocomplete="off" class="layui-input">
+							        	<input type="email" name="num" required  lay-verify="number" autocomplete="off" class="layui-input">
 							        </div>
 							        <div class="layui-form-mid layui-word-aux">将会成为您唯一的登陆名</div>
 							    </div>
 							    <div class="layui-form-item">
-								    <label class="layui-form-label">昵称</label>
+								    <label class="layui-form-label">姓名</label>
 								    <div class="layui-input-inline">
 								      <input type="text" name="name" required lay-verify="required" autocomplete="off" class="layui-input">
 								    </div>
@@ -100,25 +91,26 @@
 							    <div class="layui-form-item">
 								    <label class="layui-form-label">密码</label>
 								    <div class="layui-input-inline">
-								      <input type="password" name="pwd" required lay-verify="required" autocomplete="off" class="layui-input">
+								      <input type="password" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
 								    </div>
-								    <div class="layui-form-mid layui-word-aux">6到18个字符</div>
+								    <div class="layui-form-mid layui-word-aux">3到18个字符</div>
 							    </div>
+
+
 							    <div class="layui-form-item">
 								    <label class="layui-form-label">确认密码</label>
 								    <div class="layui-input-inline">
-								      <input type="password" name="repwd" required lay-verify="required" autocomplete="off" class="layui-input">
+								      <input type="password" name="rePassword" required lay-verify="required" autocomplete="off" class="layui-input">
 								    </div>
 							    </div>
-							    <div class="layui-form-item">
-								    <label class="layui-form-label">人类验证</label>
-								    <div class="layui-input-inline">
-								      <input type="text" name="verify" required lay-verify="required" autocomplete="off" placeholder="请回答后面问题" class="layui-input">
-								    </div>
-								    <div class="layui-form-mid">
-								    	<span style="color:#c00" class="verift-text"></span>
-								    </div>
-							    </div>
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">电话</label>
+                                    <div class="layui-input-inline">
+                                        <input type="password" name="phone" required lay-verify="number" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+
 						        <div class="layui-form-item">
 								    <button class="layui-btn" lay-submit lay-filter="regForm">立即注册</button>
 							    </div>
