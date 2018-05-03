@@ -115,7 +115,11 @@ public class JobSeekerController {
     public JsonResult addResume(Resume resume){
         try {
             Resume res = resumeService.saveOrUpdate(resume);
-            return JsonResult.ok("添加成功").set("data", resume);
+            Resume res1 = resumeService.findByName(resume.getName());
+            JobSeeker jobSeeker = new JobSeeker();
+            jobSeeker.setResumeId(res1.getId());
+            jobSeekerService.saveOrUpdate(jobSeeker);
+            return JsonResult.ok("添加成功").set("data", res);
         } catch (Exception e) {
             e.printStackTrace();
             return JsonResult.fail(e.getMessage());
