@@ -1,7 +1,8 @@
-layui.define([ 'layer',  'table','common'], function (exports) {
+layui.define([ 'layer',  'table','common','util'], function (exports) {
     var $ = layui.jquery,
         layer = layui.layer,
         common = layui.common,
+        util = layui.util,
         table  = layui.table ;
     table.render({
         elem: '#plan'
@@ -10,14 +11,14 @@ layui.define([ 'layer',  'table','common'], function (exports) {
         ,url: '/college/list' //数据接口
         ,page: true //开启分页
         ,cols: [[ //表头
-            {field: 'num', align:'center', title: '学院编号',unresize:true,templet: '<div>{{d.college.num}}</div>'}
-            ,{field: 'name', align:'center', title: '学院名',unresize:true,templet: '<div>{{d.college.name}}</div>'}
-            ,{field: 'collegeDesc', align:'center', title: '学院描述',unresize:true,templet: '<div>{{d.college.collegeDesc}}</div>'}
-            ,{field: 'collegeChairman', align:'center', title: '院长',unresize:true,templet: '<div>{{d.college.collegeChairman}}</div>'}
-            ,{field: 'collegeTel', align:'center', title: '电话',unresize:true,templet: '<div>{{d.college.collegeTel}}</div>'}
-            ,{field: 'email', align:'center', title: '邮箱',unresize:true,templet: '<div>{{d.college.email}}</div>'}
-            ,{field: 'updateTime', align:'center', title: '更新时间',unresize:true}
-            ,{field: 'status', align:'center', title: '状态',unresize:true,templet: '<div>{{d.college.status}}</div>'}
+            {field: 'num', align:'center', title: '学院编号',unresize:true}
+            ,{field: 'name', align:'center', title: '学院名',unresize:true}
+            ,{field: 'collegeDesc', align:'center', title: '学院描述',unresize:true}
+            ,{field: 'collegeChairman', align:'center', title: '院长',unresize:true}
+            ,{field: 'collegeTel', align:'center', title: '电话',unresize:true}
+            ,{field: 'email', align:'center', title: '邮箱',unresize:true}
+            ,{field: 'updateTime', align:'center', title: '更新时间',unresize:true,templet: '<div>{{# if(d.updateTime!=null){ }}{{ layui.util.toDateString(d.updateTime) }}{{# } }}</div>'}
+            ,{field: 'status', align:'center', title: '状态',unresize:true}
             ,{fixed: 'right',  title:'操作',align:'center', toolbar: '#operator',unresize:true}
         ]]
     });
