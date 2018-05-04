@@ -2,16 +2,16 @@ package com.jcohy.recruit.controller;
 
 import com.jcohy.lang.StringUtils;
 import com.jcohy.recruit.common.JsonResult;
-import com.jcohy.recruit.model.DeliveryRecord;
-import com.jcohy.recruit.model.Job;
-import com.jcohy.recruit.model.JobSeeker;
-import com.jcohy.recruit.model.Resume;
+import com.jcohy.recruit.common.PageJson;
+import com.jcohy.recruit.model.*;
 import com.jcohy.recruit.service.DeliveryRecordService;
 import com.jcohy.recruit.service.JobSeekerService;
 import com.jcohy.recruit.service.JobService;
 import com.jcohy.recruit.service.ResumeService;
 import jdk.nashorn.internal.scripts.JO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -250,5 +250,18 @@ public class JobSeekerController extends BaseController{
     }
 
 
+
+    @GetMapping("/list")
+    @ResponseBody
+    public PageJson<JobSeeker> all(@SessionAttribute("user")Admin teacher, ModelMap map){
+        PageRequest pageRequest = getPageRequest();
+        Page<JobSeeker> plans = jobSeekerService.findAll(pageRequest);
+        PageJson<JobSeeker> page = new PageJson<>();
+        page.setCode(0);
+        page.setMsg("成功");
+        page.setCount(plans.getSize());
+        page.setData(plans.getContent());
+        return page;
+    }
 
 }

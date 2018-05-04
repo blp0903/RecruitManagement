@@ -1,6 +1,8 @@
 package com.jcohy.recruit.controller;
 
 import com.jcohy.recruit.common.JsonResult;
+import com.jcohy.recruit.common.PageJson;
+import com.jcohy.recruit.model.Admin;
 import com.jcohy.recruit.model.College;
 import com.jcohy.recruit.model.JobSeeker;
 import com.jcohy.recruit.model.Resume;
@@ -9,9 +11,10 @@ import com.jcohy.recruit.service.CollegeService;
 import com.jcohy.recruit.service.JobSeekerService;
 import com.jcohy.recruit.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -216,6 +219,20 @@ public class AdminController extends BaseController{
             e.printStackTrace();
             return JsonResult.fail(e.getMessage());
         }
+    }
+
+
+    @GetMapping("/list")
+    @ResponseBody
+    public PageJson<Resume> all(@SessionAttribute("user")Admin teacher, ModelMap map){
+        PageRequest pageRequest = getPageRequest();
+        Page<Resume> plans = resumeService.findAll(pageRequest);
+        PageJson<Resume> page = new PageJson<>();
+        page.setCode(0);
+        page.setMsg("成功");
+        page.setCount(plans.getSize());
+        page.setData(plans.getContent());
+        return page;
     }
 
 }

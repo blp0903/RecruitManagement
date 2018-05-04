@@ -27,14 +27,13 @@
 <body>
 
 <fieldset id="dataList" class="layui-elem-field layui-field-title sys-list-field">
-    <legend style="text-align:center;">课程计划</legend>
+    <legend style="text-align:center;">求职者简历管理</legend>
     <button class="layui-btn" style="position: relative;float: right;right: 100px;" onclick="javascript:location.replace(location.href)">
         <i class="layui-icon">&#x1002;</i>
     </button>
     <div style="padding: 40px 0px 0px 80px;">
         <div class="layui-inline">
             <div class="layui-input-inline" style="width:auto">
-                <a id="addReport" class="layui-btn layui-btn-normal">添加</a>
             </div>
         </div>
     </div>
@@ -45,7 +44,7 @@
 
             <table class="layui-hide" id="plan" lay-filter="table"></table>
             <script type="text/html" id="operator">
-                <a class="layui-btn" lay-event="edit">编辑</a>
+                <#--<a class="layui-btn" lay-event="edit">编辑</a>-->
                 <a class="layui-btn layui-btn-danger " lay-event="del">删除</a>
             </script>
         </div>
@@ -58,7 +57,7 @@
 <script type="text/javascript">
     layui.config({
         base: '${ctx}/js/'
-    }).use('admin/plan/index');
+    }).use('resume/index');
 </script>
 </body>
 </html>
