@@ -90,7 +90,7 @@ public class JobSeekerServiceImpl implements JobSeekerService {
             throw new ServiceException("两次输入密码不一致");
         }
         JobSeeker dbUser = findById(jobSeeker.getId());
-        if(!jobSeeker.getPassword().equals(oldpassword)){
+        if(!dbUser.getPassword().equals(oldpassword)){
             throw new ServiceException("旧密码不正确");
         }
         dbUser.setPassword(password1);

@@ -112,6 +112,18 @@ public class JobSeekerController extends BaseController{
         }
     }
 
+    /**
+     * 修改密码
+     *
+     * @param jobSeeker
+     * @return
+     */
+    @GetMapping("/changePass")
+    @ResponseBody
+    public JsonResult changePass(JobSeeker jobSeeker, String oldP, String newP) {
+        jobSeekerService.updatePassword(jobSeeker, oldP, newP, newP);
+        return JsonResult.ok("修改成功");
+    }
 
     /**
      * 增加简历
@@ -152,6 +164,7 @@ public class JobSeekerController extends BaseController{
      * @return
      */
     @GetMapping("/job/{id}")
+    @ResponseBody
     public String jobDetail(@PathVariable Integer id, ModelMap map){
         Job job = jobService.findById(id);
         map.put("job",job);
@@ -172,6 +185,13 @@ public class JobSeekerController extends BaseController{
             Job job = jobService.findById(jobId);
             if (jobSeeker.getResume() == null) {
                 return JsonResult.fail("还没有简历，先去添加一份简历吧！");
+            }
+            List<DeliveryRecord> list = new ArrayList<>();
+            list = deliveryRecordService.findAll();
+            for (DeliveryRecord deliveryRecord : list) {
+                if (userId == deliveryRecord.getJobSeeker().getId() && jobId == deliveryRecord.getJob().getId()) {
+                    return JsonResult.fail("已经投递过了，不能重复投递！");
+                }
             }
             DeliveryRecord deliveryRecord = new DeliveryRecord();
             deliveryRecord.setCollegeId(job.getCollege().getId());
@@ -200,6 +220,33 @@ public class JobSeekerController extends BaseController{
         List<DeliveryRecord> list = new ArrayList<>();
         list = deliveryRecordService.findListByNum(userId);
         return JsonResult.ok("获取成功").set("data",list);
+    }
+
+
+    /**
+     * 查看投递记录详情
+     * @param id
+     * @return
+     */
+    @GetMapping("/deliveryRecord/{id}")
+    @ResponseBody
+    public JsonResult deliveryRecord(@PathVariable Integer id){
+        DeliveryRecord deliveryRecord = deliveryRecordService.findById(id);
+        return JsonResult.ok("获取成功").set("data",deliveryRecord);
+    }
+
+
+
+    /**
+     * 取消投递
+     * @param deliveryRecord
+     * @return
+     */
+    @GetMapping("/deleteRecord")
+    @ResponseBody
+    public JsonResult deleteRecord(DeliveryRecord deliveryRecord){
+        deliveryRecordService.delete(deliveryRecord.getId());
+        return JsonResult.ok("取消投递成功");
     }
 
 
