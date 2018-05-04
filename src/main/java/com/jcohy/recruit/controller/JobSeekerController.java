@@ -10,11 +10,9 @@ import com.jcohy.recruit.service.DeliveryRecordService;
 import com.jcohy.recruit.service.JobSeekerService;
 import com.jcohy.recruit.service.JobService;
 import com.jcohy.recruit.service.ResumeService;
+import jdk.nashorn.internal.scripts.JO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -139,6 +137,17 @@ public class JobSeekerController extends BaseController{
     public JsonResult findAllJobs(){
         List<Job> all = jobService.findAll();
         return JsonResult.ok("获取成功").set("data",all);
+    }
+
+
+    /**
+     * 获取job详情
+     * @return
+     */
+    @GetMapping("/job/{id}")
+    public JsonResult jobDetail(@PathVariable Integer id){
+        Job job = jobService.findById(id);
+        return JsonResult.ok("获取成功").set("data",job);
     }
 
 
