@@ -129,7 +129,7 @@
     <!--侧边导航-->
     <ul class="layui-nav layui-nav-tree layui-nav-side blog-nav-left layui-hide" lay-filter="nav">
         <li class="layui-nav-item layui-this">
-            <a href="home.html"><i class="fa fa-home fa-fw"></i>&nbsp;招聘信息</a>
+            <a href="/"><i class="fa fa-home fa-fw"></i>&nbsp;招聘信息</a>
         </li>
 
         <li class="layui-nav-item">
