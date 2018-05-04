@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Copyright  : 2015-2033 Beijing Startimes Communication & Network Technology Co.Ltd
@@ -50,7 +52,10 @@ public class UploadController {
         }
         String downloadUrl = StringUtils.replace(url.toString(), "upload", "download");
         System.out.println("replaceUrl-----"+downloadUrl);
-        return JsonResult.ok("data",downloadUrl+"/"+fileName);
+        Map<String,String> map = new HashMap<>();
+        map.put("downloadUrl",downloadUrl+"/"+fileName);
+        map.put("fileName",fileName);
+        return JsonResult.ok("data",map);
     }
 
     @GetMapping("/download/{name}")

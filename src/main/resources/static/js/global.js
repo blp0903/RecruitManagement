@@ -115,7 +115,7 @@
     	isUser();
     	var url = window.location.href;
     	if (url.indexOf("user.html")>=1) {
-    		window.location.href=_contextPath+"/login.html"
+    		window.location.href="/user/login"
     	}
     });
     
@@ -125,8 +125,7 @@
     	if (user!=null) {
     		user = JSON.parse(user);
     		$(".blog-user").empty();
-    		$(".blog-user").append('<a href="user/info"><img src="images/login.png" alt="" title="" /></a>'+
-            	'<a href="user/info"><i class="fa fa-cog"></i></a>'+
+    		$(".blog-user").append('<a href="user/info"><img src="/images/login.png" alt="" title="" /></a>'+
             	'<a class="user-out"><i class="fa fa-sign-out"></i></a>');
     	} else {
     		$(".blog-user").empty();

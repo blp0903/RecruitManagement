@@ -12,6 +12,8 @@ import com.jcohy.recruit.service.JobService;
 import com.jcohy.recruit.service.ResumeService;
 import jdk.nashorn.internal.scripts.JO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/jobSeeker")
 public class JobSeekerController extends BaseController{
 
@@ -43,6 +45,7 @@ public class JobSeekerController extends BaseController{
      * @return
      */
     @GetMapping("/login")
+    @ResponseBody
     public JsonResult login(HttpServletRequest request,Integer num, String password){
         JobSeeker login = null;
         try {
@@ -74,6 +77,7 @@ public class JobSeekerController extends BaseController{
      * @return
      */
     @PostMapping("/register")
+    @ResponseBody
     public JsonResult register(Integer num, String phone, String password, String name){
         if(num == null||phone == null || StringUtils.hashEmpty(name,password)){
             return JsonResult.fail("参数不能为空");
@@ -97,6 +101,7 @@ public class JobSeekerController extends BaseController{
      * @return
      */
     @GetMapping("/update")
+    @ResponseBody
     public JsonResult update(JobSeeker jobSeeker){
         try {
             JobSeeker stu = jobSeekerService.saveOrUpdate(jobSeeker);
@@ -115,6 +120,7 @@ public class JobSeekerController extends BaseController{
      * @return
      */
     @GetMapping("/addResume")
+    @ResponseBody
     public JsonResult addResume(Resume resume) {
         try {
             Resume res = resumeService.saveOrUpdate(resume);
@@ -134,6 +140,7 @@ public class JobSeekerController extends BaseController{
      * @return
      */
     @GetMapping("/jobs")
+    @ResponseBody
     public JsonResult findAllJobs(){
         List<Job> all = jobService.findAll();
         return JsonResult.ok("获取成功").set("data",all);
@@ -145,9 +152,10 @@ public class JobSeekerController extends BaseController{
      * @return
      */
     @GetMapping("/job/{id}")
-    public JsonResult jobDetail(@PathVariable Integer id){
+    public String jobDetail(@PathVariable Integer id, ModelMap map){
         Job job = jobService.findById(id);
-        return JsonResult.ok("获取成功").set("data",job);
+        map.put("job",job);
+        return "front/detail";
     }
 
 
@@ -157,6 +165,7 @@ public class JobSeekerController extends BaseController{
      * @param  jobId  工作id
      */
     @GetMapping("/send")
+    @ResponseBody
     public JsonResult send(Integer userId, Integer jobId){
         try {
             JobSeeker jobSeeker = jobSeekerService.findById(userId);
@@ -186,6 +195,7 @@ public class JobSeekerController extends BaseController{
      * @return
      */
     @GetMapping("/deliveryRecord")
+    @ResponseBody
     public JsonResult findSend(Integer userId){
         List<DeliveryRecord> list = new ArrayList<>();
         list = deliveryRecordService.findListByNum(userId);

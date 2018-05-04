@@ -52,32 +52,57 @@
                 <!--左边文章列表-->
                 <div class="blog-main-left animated slideInLeft">
                 	<!-- 文章内容（使用Kingeditor富文本编辑器发表的） -->
-                    <div class="article-detail shadow">
-                        <div class="article-detail-title title"><i class="layui-icon">&#xe609;</i>Java高级工程师  14k-18k/月</a></div>
-                        <div class="article-detail-info">
-                        	<span>编辑时间：2017/3/18 17:30:22</span>
-                            <span>作者：北京</span>
-                            <span>浏览量：6</span>
-                        </div>
-                        <div class="article-detail-content">
-                             从准备实施个人博客这个计划，到现在一个月不到，准备的东西很少，想着先运营起来再说，边测试边改版，吸取广大好友的意见，针对问题慢慢改进。有了这个发版也是博主，撸了一晚上，
-                            第一次配置服务器，有些地方总会遇到问题，索性，解决了，关于网页加载慢的问题，博主正在积极解决!请小主们稍安勿躁。
-                            <br><br>
-                            有想法有意见，欢迎点击有边关注我与我交流。时间有限，留言功能还未上线
-                            <br><br>
-                            目前这个v0.1版本，是纯前端组成，还没有涉及后端。中间有段时间一直在想如果数据太多了，用纯前端是不是我这布局会有问题，页面会不会变形，并且自己花了一天时间
-                            也搭了一个带后台的项目，后台是java实现的，使用了一个spring boot框架，感觉修改一些页面样式，太麻烦了，每次都得重启服务，想想第一版，应该不会有太多数
-                            据吧!就又用回到HBuilder，使用纯前端编辑项目。中间来来回回，自己纠结了好几次，不过最终还是拿这个版发布了。
-                            <br><br>
-                            <img src="images/art/001.jpg" width="680" height="300">
+                    <form class="layui-form">
+                        <div class="article-detail shadow">
+
+                            <div class="layui-form-item">
+                                <input type="hidden" name="id" value="${job.id}">
+                            </div>
+
+                            <div class="article-detail-title title">${job.name}  ${job.treatment}/月</a></div>
+                            <div class="article-detail-info">
+                                <span>编辑时间：${job.createTime}</span>
+                                <span>大学： ${job.college.name}</span>
+                                <span>人数： ${job.numbers}</span>
+                            </div>
                             <div class="article-detail-sign">
                                 <hr class="layui-bg-gray">
-                                <p>出自：</p>
-                                <p>地址：工1-413</p>
+                                <p>职位：${job.name}</p>
+                                <p>待遇：${job.treatment}</p>
+                                <p>学历：${job.title}</p>
+                                <p>地址：${job.location}</p>
+                                <p>工作经验： ${job.experience}</p>
                             </div>
-                        </div >
-                    </div>
+
+                            <div class="article-detail-content">
+                                 <#--从准备实施个人博客这个计划，到现在一个月不到，准备的东西很少，想着先运营起来再说，边测试边改版，吸取广大好友的意见，针对问题慢慢改进。有了这个发版也是博主，撸了一晚上，-->
+                                <#--第一次配置服务器，有些地方总会遇到问题，索性，解决了，关于网页加载慢的问题，博主正在积极解决!请小主们稍安勿躁。-->
+                                <#--<br><br>-->
+                                <#--有想法有意见，欢迎点击有边关注我与我交流。时间有限，留言功能还未上线-->
+                                <#--<br><br>-->
+                                <#--目前这个v0.1版本，是纯前端组成，还没有涉及后端。中间有段时间一直在想如果数据太多了，用纯前端是不是我这布局会有问题，页面会不会变形，并且自己花了一天时间-->
+                                <#--也搭了一个带后台的项目，后台是java实现的，使用了一个spring boot框架，感觉修改一些页面样式，太麻烦了，每次都得重启服务，想想第一版，应该不会有太多数-->
+                                <#--据吧!就又用回到HBuilder，使用纯前端编辑项目。中间来来回回，自己纠结了好几次，不过最终还是拿这个版发布了。-->
+                                <#--<br><br>-->
+                                 <p>职位描述：</p>
+                                 ${job.desc}
+                                <#--<img src="/images/bg/carousel3.jpg" width="680" height="300">-->
+                            </div >
+
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <#if (job.status)== 0>
+                                        <button class="layui-btn" lay-submit lay-filter="send">立即投递</button>
+                                    <#else>
+                                        <button class="layui-btn" lay-submit lay-filter="send">取消投递</button>
+                                    </#if>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
                 </div>
+
                 <!--右边小栏目-->
                 <div class="blog-main-right">
                 	<!--右边悬浮 平板或手机设备显示-->
@@ -119,6 +144,33 @@
     <!-- 全局脚本 -->
     <script src="${ctx!}/js/global.js"></script>
     <script src="${ctx!}/js/canvas-particle.js"></script>
+    <script type="text/javascript">
+        layui.define([ 'layer',  'form'], function (exports) {
+            var $ = layui.jquery,
+            form  = layui.form ;
+            // 修改个人资料
+            var user = MyLocalStorage.get("user");
+            user = JSON.parse(user);
+            form.on('submit(send)', function(data){
+                data = data.field;
+                console.log(data);
+                console.log(user);
+                $.ajax({
+                    type: 'GET',
+                    async:true,
+                    url: "/jobSeeker/send?userId="+user.id+"&jobId="+data.id,
+                    success:function(result) {
+                        if (result.isOk) {
+                            layer.msg(result.msg,{icon:1});
+                        } else {
+                            layer.msg(result.msg,{anim:6});
+                        }
+                    }
+                });
+                return false;
+            });
 
+        });
+    </script>
 </body>
 </html>

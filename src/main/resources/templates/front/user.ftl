@@ -44,7 +44,7 @@
         	<input id="token" type="hidden">
 			<input id="uid" type="hidden">
             <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow">
-                <a href="index.html" title="网站首页">网站首页</a>
+                <a href="/" title="网站首页">网站首页</a>
                 <a><cite>个人中心</cite></a>
             </blockquote>
             <div class="blog-main">
@@ -59,6 +59,9 @@
 		    		<!-- 我的资料 -->
 		    		<div class="layui-tab-item layui-show">
 			    		<form class="layui-form layui-form-pane" method="post">
+                            <div class="layui-form-item">
+                                    <input type="hidden" name="id" id="id">
+                            </div>
 			    			<div class="layui-form-item">
 						    	<label class="layui-form-label">帐号</label>
 					    		<div class="layui-input-inline">
@@ -93,7 +96,7 @@
 							<div class="layui-form-item">
 								<label class="layui-form-label">出生日期</label>
 								<div class="layui-input-inline">
-									<input id="birth" type="text" name="phone" autocomplete="off" class="layui-input">
+									<input id="birth" type="text" name="birth" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 
@@ -107,42 +110,85 @@
 		    		<!-- 我的简历 -->
     				<div class="layui-tab-item" id="resume">
                         <form class="layui-form layui-form-pane" method="post">
+                            <input id="resumeId" type="hidden" name="id">
+
                             <div class="layui-form-item">
                                 <label class="layui-form-label">帐号</label>
                                 <div class="layui-input-inline">
-                                    <input id="num" type="text" name="num" required  lay-verify="number" autocomplete="off" class="layui-input">
+                                    <input id="resumenum" type="text" name="num" required  lay-verify="number" autocomplete="off" class="layui-input layui-disabled">
                                 </div>
                             </div>
 
                             <div class="layui-form-item">
                                 <label class="layui-form-label">姓名</label>
                                 <div class="layui-input-inline">
-                                    <input id="name" type="text" name="name" required  lay-verify="required" autocomplete="off" class="layui-input">
+                                    <input id="resumename" type="text" name="name" required  lay-verify="required" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-input-inline">
-                                    <input type="radio" name="sex" value="男" title="男">
-                                    <input type="radio" name="sex" value="女" title="女">
+                                    <input type="radio" name="sex" value="3" title="男">
+                                    <input type="radio" name="sex" value="4" title="女">
                                 </div>
                             </div>
+
 
                             <div class="layui-form-item">
                                 <label class="layui-form-label">电话</label>
                                 <div class="layui-input-inline">
-                                    <input id="phone" type="text" name="phone" autocomplete="off" class="layui-input">
+                                    <input id="resumephone" type="text" name="phone" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">身份证号</label>
+                                <div class="layui-input-inline">
+                                    <input id="resumeidNo" type="text" name="idNo" required  lay-verify="number" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
 
                             <div class="layui-form-item">
                                 <label class="layui-form-label">邮箱</label>
                                 <div class="layui-input-inline">
-                                    <input id="email" type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input" >
+                                    <input id="resumeemail" type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input" >
+                                </div>
+                            </div>
+
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">教育经历</label>
+                                <div class="layui-input-block">
+                                    <input id="resumeeducation" type="text" name="education"  autocomplete="off" class="layui-input" >
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">工作经历</label>
+                                <div class="layui-input-block">
+                                    <textarea placeholder="请输入个人工作经历" class="layui-textarea" name="work" id="resumework"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">个人评价</label>
+                                <div class="layui-input-block">
+                                    <textarea placeholder="请输入个人评价" class="layui-textarea" name="personal" id="resumepersonal"></textarea>
                                 </div>
                             </div>
 
                             <div class="layui-form-item">
                                 <label class="layui-form-label">出生日期</label>
                                 <div class="layui-input-inline">
-                                    <input id="birth" type="text" name="phone" autocomplete="off" class="layui-input">
+                                    <input id="resumebirth" type="text" name="phone" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">上传简历</label>
+                                <div class="layui-input-block">
+                                    <button type="button" class="layui-btn" id="upload">
+                                        <i class="layui-icon">&#xe67c;</i>上传简历
+                                    </button>
+                                    <input type="hidden" name="annexUrl">
                                 </div>
                             </div>
 
@@ -153,15 +199,16 @@
                             </div>
                         </form>
     				</div>
+
     				<!-- 我的投递 -->
-    				<div class="layui-tab-item" id="myMessage">
-    					<div class="layui-tab layui-tab-brief" lay-filter="user">
-	    					<div id="LAY_minemsg" style="margin-top: 10px;">
-		    					<ul class="revs">
-		    				     </ul>
-	    				     </div>
-    				    </div>
-    				</div>
+                    <div class="layui-tab-item" id="myMessage">
+                        <div class="layui-tab layui-tab-brief" lay-filter="user">
+                            <div id="LAY_minemsg" style="margin-top: 10px;">
+                                <ul class="mine-msg msgs">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
     				<!-- 密码 -->
     				<div class="layui-tab-item">

@@ -74,7 +74,7 @@
 
                                 <div class="article-right">
                                     <div class="article-title">
-                                        <a href="/job/${x.id}">职位名称：${x.name}</a>
+                                        <a href="/jobSeeker/job/${x.id}">职位名称：${x.name}</a>
                                     </div>
                                     <div class="article-abstract">
                                         公司名称：${x.college.name}
@@ -119,11 +119,11 @@
 						<div class="layui-tab-content">
 							<div class="layui-tab-item layui-show">
 								<ul class="blog-module-ul">
-									<li><i class="layui-badge-rim layui-bg-red">1</i>&nbsp;&nbsp;<a href="detail.ftl?aid=0001"><i class="layui-icon">&#xe609;</i>Java开发工程师</a></li>
-									<li><i class="layui-badge-rim layui-bg-orange">2</i>&nbsp;&nbsp;<a href="detail.ftl?aid=0005">高级php开发工程师</a></li>
-									<li><i class="layui-badge-rim layui-bg-green">3</i>&nbsp;&nbsp;<a href="detail.ftl?aid=0003">c#软件工程师!</a></li>
-									<li><i class="layui-badge-rim">4</i>&nbsp;&nbsp;<a href="detail.ftl?aid=0004">办公室文员</a></li>
-									<li><i class="layui-badge-rim">5</i>&nbsp;&nbsp;<a href="detail.ftl?aid=0004">销售总监/经理</a></li>
+									<li><i class="layui-badge-rim layui-bg-red">1</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">Java开发工程师</a></li>
+									<li><i class="layui-badge-rim layui-bg-orange">2</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">高级php开发工程师</a></li>
+									<li><i class="layui-badge-rim layui-bg-green">3</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">c#软件工程师!</a></li>
+									<li><i class="layui-badge-rim">4</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">办公室文员</a></li>
+									<li><i class="layui-badge-rim">5</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">销售总监/经理</a></li>
 								</ul>
 							</div>
 						</div>

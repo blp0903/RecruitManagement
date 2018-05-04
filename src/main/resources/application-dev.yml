@@ -1,4 +1,4 @@
 server:
   port: 8989
 file:
-  path: /opt/local/jcohy
+  path: D:\files
