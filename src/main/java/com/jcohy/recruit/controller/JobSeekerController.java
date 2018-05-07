@@ -160,6 +160,19 @@ public class JobSeekerController extends BaseController{
 
 
     /**
+     * 搜索job模糊查询
+     * @param key
+     * @return
+     */
+    @GetMapping("/searchJob")
+    @ResponseBody
+    public JsonResult searchJob(String key){
+        List<Job> list = jobService.findByNameLike(key);
+        return JsonResult.ok().set("data", list);
+    }
+
+
+    /**
      * 获取job详情
      * @return
      */

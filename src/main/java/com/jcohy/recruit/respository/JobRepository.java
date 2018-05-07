@@ -2,9 +2,13 @@ package com.jcohy.recruit.respository;
 
 import com.jcohy.recruit.model.Job;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface JobRepository extends JpaRepository<Job,Integer> {
 
-    Job findJobByNum(Integer num);
+    @Query(value = "select * from job a where a.name like %?1%", nativeQuery = true)
+    List<Job> findByName(String name);
 
 }

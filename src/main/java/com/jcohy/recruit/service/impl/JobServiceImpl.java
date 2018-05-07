@@ -29,6 +29,11 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    public List<Job> findByNameLike(String name) {
+        return jobRepository.findByName(name);
+    }
+
+    @Override
     public Job findById(Integer id) {
         return jobRepository.findById(id).get();
     }

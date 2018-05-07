@@ -59,7 +59,7 @@ public class LoginController extends BaseController{
                     return JsonResult.fail("登录失败,用户名账号密码不匹配");
                 }
                 session.setAttribute("user",login);
-                return JsonResult.ok().set("returnUrl", "/teacher/main");
+                return JsonResult.ok().set("returnUrl", "/college/main");
             }else  if(StringUtils.trim(role).equals("admin")){
                 Admin login = adminService.login(num, password);
                 if(login == null){
@@ -86,7 +86,7 @@ public class LoginController extends BaseController{
      */
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response){
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
 

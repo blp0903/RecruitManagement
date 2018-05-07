@@ -21,6 +21,14 @@ public interface JobService {
      */
     List<Job> findAll();
 
+
+    /**
+     * 模糊查询
+     *
+     * @return
+     */
+    List<Job> findByNameLike(String name);
+
     /**
      * 根据ID查询
      * @param id
