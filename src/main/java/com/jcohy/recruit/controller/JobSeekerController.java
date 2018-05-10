@@ -182,7 +182,6 @@ public class JobSeekerController extends BaseController{
      * @return
      */
     @GetMapping("/job/{id}")
-    @ResponseBody
     public String jobDetail(@PathVariable Integer id, ModelMap map){
         Job job = jobService.findById(id);
         map.put("job",job);

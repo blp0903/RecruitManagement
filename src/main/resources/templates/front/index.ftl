@@ -91,8 +91,6 @@
                                     <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;${x.createTime}</span>
                                     <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;${x.title}</span>
                                     <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">${x.experience}</a></span>
-                                    <!--<span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;0</span>-->
-                                    <!--<span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;4</span>-->
                                 </div>
                             </div>
 						</#list>
@@ -100,16 +98,6 @@
                 </div>
                 <!--右边小栏目-->
                 <div class="blog-main-right">
-                	<#--<!-- 小编信息 &ndash;&gt;-->
-                    <#--<div class="blogerinfo shadow animated fadeInRight">-->
-                        <#--<div class="blogerinfo-figure">-->
-                            <#--<img src="${ctx!}/images/login.png" alt="Absolutely" />-->
-                        <#--</div>-->
-                        <#--<p class="blogerinfo-nickname"></p>-->
-                        <#--<p class="blogerinfo-introduce">一枚90后程序员，java开发工程师</p>-->
-                        <#--<p class="blogerinfo-location"><i class="fa fa-location-arrow"></i>&nbsp;中国 - 北京</p>-->
-                        <#--<hr />-->
-                    <#--</div>-->
                     <div class="blog-search">
                         <form class="layui-form" action="">
                             <div class="layui-form-item">
@@ -131,11 +119,17 @@
 						<div class="layui-tab-content">
 							<div class="layui-tab-item layui-show">
 								<ul class="blog-module-ul">
-									<li><i class="layui-badge-rim layui-bg-red">1</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">Java开发工程师</a></li>
-									<li><i class="layui-badge-rim layui-bg-orange">2</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">高级php开发工程师</a></li>
-									<li><i class="layui-badge-rim layui-bg-green">3</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">c#软件工程师!</a></li>
-									<li><i class="layui-badge-rim">4</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">办公室文员</a></li>
-									<li><i class="layui-badge-rim">5</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">销售总监/经理</a></li>
+                                    <@jobList>
+                                        <#list list as x>
+						                    <li><i class="layui-badge-rim">${x.id}</i>&nbsp;&nbsp;<a href="/jobSeeker/job/${x.id}">${x.name}</a></li>
+                                        </#list>
+                                    </@jobList>
+
+									<#--<li><i class="layui-badge-rim layui-bg-red">1</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">Java开发工程师</a></li>-->
+									<#--<li><i class="layui-badge-rim layui-bg-orange">2</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">高级php开发工程师</a></li>-->
+									<#--<li><i class="layui-badge-rim layui-bg-green">3</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">c#软件工程师!</a></li>-->
+									<#--<li><i class="layui-badge-rim">4</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">办公室文员</a></li>-->
+									<#--<li><i class="layui-badge-rim">5</i>&nbsp;&nbsp;<a href="/jobSeeker/job/1">销售总监/经理</a></li>-->
 								</ul>
 							</div>
 						</div>
