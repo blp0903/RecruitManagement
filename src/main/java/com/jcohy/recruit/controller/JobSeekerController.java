@@ -3,6 +3,7 @@ package com.jcohy.recruit.controller;
 import com.jcohy.lang.StringUtils;
 import com.jcohy.recruit.common.JsonResult;
 import com.jcohy.recruit.common.PageJson;
+import com.jcohy.recruit.exception.ServiceException;
 import com.jcohy.recruit.model.*;
 import com.jcohy.recruit.service.DeliveryRecordService;
 import com.jcohy.recruit.service.JobSeekerService;
@@ -121,8 +122,12 @@ public class JobSeekerController extends BaseController{
     @GetMapping("/changePass")
     @ResponseBody
     public JsonResult changePass(JobSeeker jobSeeker, String oldP, String newP) {
-        jobSeekerService.updatePassword(jobSeeker, oldP, newP, newP);
-        return JsonResult.ok("修改成功");
+        try {
+            jobSeekerService.updatePassword(jobSeeker, oldP, newP, newP);
+            return JsonResult.ok("修改成功");
+        } catch (ServiceException e) {
+            return JsonResult.fail(e.getMessage());
+        }
     }
 
     /**
