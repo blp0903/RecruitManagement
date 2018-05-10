@@ -11,6 +11,7 @@ layui.use(['jquery','form','util','upload'], function () {
     	var sex = 0 ;
     	var resumeSex = 3;
         $("#id").val(user.id);
+        $("#user").val(user.id);
     	$("#num").val(user.num);
     	$("#name").val(user.name);
     	$("#phone").val(user.phone);
@@ -163,23 +164,24 @@ layui.use(['jquery','form','util','upload'], function () {
 	// 修改密码
     form.on('submit(formPwd)', function(data){
     	data = data.field;
-    	if (data.pwd.length<6 || data.pwd.length>18) {
+    	if (data.newP.length<6 || data.newP.length>18) {
     		layer.msg("密码必须6到18个字符",{anim:6});
     		return false;
     	}
-    	if (data.pwd!=data.repwd) {
+    	if (data.newP!=data.repwd) {
     		layer.msg("两次密码输入不一致",{anim:6});
     		return false;
     	}
 
     	$.ajax({
-    		type: 'post',
+    		type: 'get',
     		data: data,
     		async:true,
-    		url: "/user/set/pwd.do",
+    		url: "/jobSeeker/changePass",
     		success:function(result) {
     			if (result.isOk) {
     				layer.msg("修改成功!",{icon:1});
+                    window.location.href = "/user/index";
     			} else {
     				layer.msg(result.msg,{anim:6});
     			}

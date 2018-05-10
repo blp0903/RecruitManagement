@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <!--左边文章列表-->
-                <div class="blog-main-left animated slideInLeft">
+                <div class="blog-main-left animated slideInLeft" id="jobList">
 					<@jobList>
 						<#list list as x>
 							<div class="article shadow animated fadeInLeft">
@@ -100,15 +100,27 @@
                 </div>
                 <!--右边小栏目-->
                 <div class="blog-main-right">
-                	<!-- 小编信息 -->
-                    <div class="blogerinfo shadow animated fadeInRight">
-                        <div class="blogerinfo-figure">
-                            <img src="${ctx!}/images/login.png" alt="Absolutely" />
-                        </div>
-                        <p class="blogerinfo-nickname"></p>
-                        <p class="blogerinfo-introduce">一枚90后程序员，java开发工程师</p>
-                        <p class="blogerinfo-location"><i class="fa fa-location-arrow"></i>&nbsp;中国 - 北京</p>
-                        <hr />
+                	<#--<!-- 小编信息 &ndash;&gt;-->
+                    <#--<div class="blogerinfo shadow animated fadeInRight">-->
+                        <#--<div class="blogerinfo-figure">-->
+                            <#--<img src="${ctx!}/images/login.png" alt="Absolutely" />-->
+                        <#--</div>-->
+                        <#--<p class="blogerinfo-nickname"></p>-->
+                        <#--<p class="blogerinfo-introduce">一枚90后程序员，java开发工程师</p>-->
+                        <#--<p class="blogerinfo-location"><i class="fa fa-location-arrow"></i>&nbsp;中国 - 北京</p>-->
+                        <#--<hr />-->
+                    <#--</div>-->
+                    <div class="blog-search">
+                        <form class="layui-form" action="">
+                            <div class="layui-form-item">
+                                <div class="search-keywords  shadow">
+                                    <input type="text" name="key" lay-verify="required" placeholder="请输入职位名" autocomplete="off" class="layui-input ">
+                                </div>
+                                <div class="search-submit  shadow">
+                                    <a class="search-btn" lay-submit lay-filter="formSearch"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <!--推荐/点击排行-->
 					<div class="layui-tab layui-tab-brief shadow animated fadeInRight" lay-filter="docDemoTabBrief">
@@ -165,5 +177,55 @@
     <script src="${ctx!}/js/canvas-particle.js"></script>
     <!-- 本页脚本 -->
     <script src="${ctx!}/js/index.js"></script>
+    <script type="text/javascript">
+        layui.define([ 'layer','form'], function (exports) {
+            var $ = layui.jquery,
+                    form  = layui.form ;
+            //监听评论提交
+            form.on('submit(formSearch)', function (data) {
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    data: data.field,
+                    url: "/jobSeeker/searchJob",
+                    success:function(result) {
+                        if (result.isOk) {
+                            console.log(result.data);
+                            createHtml(result.data);
+                        } else {
+                            layer.msg(result.msg,{anim:6});
+                        }
+                    }
+                });
+                return false;
+            });
+
+            function createHtml(data) {
+                obj = $("#jobList");
+                obj.empty();
+                var detailHtml = '';
+                for(var i=0;i<data.length;i++){
+                    detailHtml += '<div class="article shadow animated fadeInLeft">';
+                    detailHtml += '<div class="article-left ">';
+                    detailHtml += '<img src="/images/01.jpg" alt="'+data[i].name+'"/>';
+                    detailHtml += '</div>';
+                    detailHtml += '<div class="article-right">';
+                    detailHtml += '<div class="article-title">';
+                    detailHtml += '<a href="/jobSeeker/job/'+data[i].id+'">职位名称：'+data[i].name+'</a></div>';
+                    detailHtml += '<div class="article-abstract">+公司名称：'+data[i].college.name+'</div>';
+                    detailHtml += '<div class="article-abstract">+薪资：'+data[i].treatment+'</div>';
+                    detailHtml += '<div class="article-abstract">+地点：'+data[i].location+'</div>';
+                    detailHtml += '</div>';
+                    detailHtml += '<div class="clear"></div>';
+                    detailHtml += '<div class="article-footer">';
+                    detailHtml += '<span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;'+data[i].createTime+'</span>';
+                    detailHtml += '<span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;'+data[i].title+'</span>';
+                    detailHtml += '<span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="#">'+data[i].experience+'</a></span>';
+                    detailHtml += '</div></div>';
+                }
+                obj.append(detailHtml);
+            }
+        });
+    </script>
 </body>
 </html>

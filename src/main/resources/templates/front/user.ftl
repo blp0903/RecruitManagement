@@ -213,10 +213,18 @@
     				<!-- 密码 -->
     				<div class="layui-tab-item">
     					<form class="layui-form layui-form-pane" method="post">
+                            <input type="hidden" id="user" name="id">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">旧密码</label>
+                                <div class="layui-input-inline">
+                                    <input type="password" name="oldP" required  lay-verify="required" autocomplete="off" class="layui-input">
+                                </div>
+
+                            </div>
     						<div class="layui-form-item">
 						    	<label class="layui-form-label">新密码</label>
 					    		<div class="layui-input-inline">
-					        		<input type="password" name="pwd" required  lay-verify="required" autocomplete="off" class="layui-input">
+					        		<input type="password" name="newP" required  lay-verify="required" autocomplete="off" class="layui-input">
 					        	</div>
 					        	<div class="layui-form-mid layui-word-aux">6到18个字符</div>
 					   		</div>
