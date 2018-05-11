@@ -42,7 +42,7 @@ layui.use(['jquery','form','util','upload'], function () {
     	$(".layui-form-radio").get(sex).click();
         $(".layui-form-radio").get(resumeSex).click();
     } else {
-    	layer.msg('会话已过期,请先去登陆',{anim:6});
+    	layer.msg('会话已过期,请先去登陆',{anim:6,time:2000});
     	location.href =  "/user/login";
     }
 
@@ -68,25 +68,6 @@ layui.use(['jquery','form','util','upload'], function () {
 					}
 				}
 				$(".msgs").html(html);
-				// html = "";
-				// for (var i=0; i<revs.length; i++) {
-				// 	var time = util.timeAgo(formatDate(""+revs[i].time));
-				// 	if (revs[i].aid=='0') {
-				// 		html +=
-				// 			'<li>'+
-				// 				'<blockquote class="layui-elem-quote"><i style="color:#999">'+time+':&nbsp;</i>'+
-				// 				'在<span>留言墙</span>中的留言:<a href="about.html">【'+revs[i].content+'】</a><br></blockquote>'+
-				// 			'</li>';
-				//
-				// 	} else {
-				// 		html +=
-				// 			'<li>'+
-				// 			'<blockquote class="layui-elem-quote"><i style="color:#999">'+time+':&nbsp;</i>'+
-				// 			'在<span>'+revs[i].title+'</span>中的回复:<a href="detail.html?aid='+revs[i].aid+'">【'+revs[i].content+'】</a><br></blockquote>'+
-				// 		'</li>';
-				// 	}
-				// }
-				// $(".revs").html(html);
 			} else {
 				layer.msg(result.msg,{anim:6});
 			}
@@ -216,14 +197,14 @@ layui.use(['jquery','form','util','upload'], function () {
 });
 
 //取消投递
-function msgDel(mid) {
+function msgDel(id) {
 	$.ajax({
-		type: 'POST',
-		data: {mid:mid},
-		url: "/msg/del.do",
+		type: 'GET',
+		data: {id:id},
+		url: "/jobSeeker/deleteRecord",
 		success:function(result) {
 			if (result.isOk) {
-				$("#"+mid).remove();
+				$("#"+id).remove();
 			} else {
 				layer.msg(result.msg,{anim:6,icon:5});
 			}

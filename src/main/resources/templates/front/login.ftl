@@ -18,7 +18,7 @@
     <nav class="blog-nav layui-header">
         <div class="blog-container">
 
-            <a class="blog-logo" href="index.ftl"><img src="${ctx!}/images/login.png" width="64px" height="64px"></a>
+            <#--<a class="blog-logo" href="/"><img src="${ctx!}/images/login.png" width="64px" height="64px"></a>-->
             <!-- 导航菜单 -->
             <ul class="layui-nav" lay-filter="nav">
 				<li class="layui-nav-item layui-this">
@@ -39,7 +39,7 @@
     <div class="blog-body">
         <div class="blog-container">
             <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow">
-                <a href="index.ftl" title="网站首页">网站首页</a>
+                <a href="/" title="网站首页">网站首页</a>
                 <a><cite>登陆注册</cite></a>
             </blockquote>
             <div class="blog-main">
@@ -155,7 +155,7 @@
     <!--侧边导航-->
     <ul class="layui-nav layui-nav-tree layui-nav-side blog-nav-left layui-hide" lay-filter="nav">
 		<li class="layui-nav-item layui-this">
-			<a href="home.html"><i class="fa fa-home fa-fw"></i>&nbsp;招聘信息</a>
+			<a href="/"><i class="fa fa-home fa-fw"></i>&nbsp;招聘信息</a>
 		</li>
 
 		<li class="layui-nav-item">

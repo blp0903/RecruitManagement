@@ -26,7 +26,7 @@
             <!-- 导航菜单 -->
             <ul class="layui-nav" lay-filter="nav">
                 <li class="layui-nav-item layui-this">
-                    <a href="home.html"><i class="fa fa-home fa-fw"></i>&nbsp;招聘信息</a>
+                    <a href="/"><i class="fa fa-home fa-fw"></i>&nbsp;招聘信息</a>
                 </li>
 
                 <li class="layui-nav-item">
@@ -75,27 +75,18 @@
                             </div>
 
                             <div class="article-detail-content">
-                                 <#--从准备实施个人博客这个计划，到现在一个月不到，准备的东西很少，想着先运营起来再说，边测试边改版，吸取广大好友的意见，针对问题慢慢改进。有了这个发版也是博主，撸了一晚上，-->
-                                <#--第一次配置服务器，有些地方总会遇到问题，索性，解决了，关于网页加载慢的问题，博主正在积极解决!请小主们稍安勿躁。-->
-                                <#--<br><br>-->
-                                <#--有想法有意见，欢迎点击有边关注我与我交流。时间有限，留言功能还未上线-->
-                                <#--<br><br>-->
-                                <#--目前这个v0.1版本，是纯前端组成，还没有涉及后端。中间有段时间一直在想如果数据太多了，用纯前端是不是我这布局会有问题，页面会不会变形，并且自己花了一天时间-->
-                                <#--也搭了一个带后台的项目，后台是java实现的，使用了一个spring boot框架，感觉修改一些页面样式，太麻烦了，每次都得重启服务，想想第一版，应该不会有太多数-->
-                                <#--据吧!就又用回到HBuilder，使用纯前端编辑项目。中间来来回回，自己纠结了好几次，不过最终还是拿这个版发布了。-->
-                                <#--<br><br>-->
                                  <p>职位描述：</p>
                                  ${job.desc}
-                                <#--<img src="/images/bg/carousel3.jpg" width="680" height="300">-->
                             </div >
 
                             <div class="layui-form-item">
                                 <div class="layui-input-block">
-                                    <#if (job.status)== 0>
+                                    <#--<#if (job.status)== 0>-->
+                                        <#--<button class="layui-btn" lay-submit lay-filter="send">立即投递</button>-->
+                                    <#--<#else>-->
+                                        <#--<button class="layui-btn" lay-submit lay-filter="send">取消投递</button>-->
+                                    <#--</#if>-->
                                         <button class="layui-btn" lay-submit lay-filter="send">立即投递</button>
-                                    <#else>
-                                        <button class="layui-btn" lay-submit lay-filter="send">取消投递</button>
-                                    </#if>
                                 </div>
                             </div>
 
@@ -147,6 +138,7 @@
     <script type="text/javascript">
         layui.define([ 'layer',  'form'], function (exports) {
             var $ = layui.jquery,
+            layer = layui.layer,
             form  = layui.form ;
             // 修改个人资料
             var user = MyLocalStorage.get("user");
@@ -155,21 +147,25 @@
                 data = data.field;
                 console.log(data);
                 console.log(user);
-                $.ajax({
-                    type: 'GET',
-                    async:true,
-                    url: "/jobSeeker/send?userId="+user.id+"&jobId="+data.id,
-                    success:function(result) {
-                        if (result.isOk) {
-                            layer.msg(result.msg,{icon:1});
-                        } else {
-                            layer.msg(result.msg,{anim:6});
+                if(user != null){
+                    $.ajax({
+                        type: 'GET',
+                        async:true,
+                        url: "/jobSeeker/send?userId="+user.id+"&jobId="+data.id,
+                        success:function(result) {
+                            if (result.isOk) {
+                                layer.msg(result.msg,{icon:1,time:2000});
+                            } else {
+                                layer.msg(result.msg,{anim:6,time:2000});
+                            }
                         }
-                    }
-                });
+                    });
+                }else{
+                    layer.msg("请先登录",{anim:6,time:2000});
+                    window.location.href="/user/login";
+                }
                 return false;
             });
-
         });
     </script>
 </body>

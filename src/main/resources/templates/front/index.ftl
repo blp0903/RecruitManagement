@@ -121,7 +121,16 @@
 								<ul class="blog-module-ul">
                                     <@jobList>
                                         <#list list as x>
-						                    <li><i class="layui-badge-rim">${x.id}</i>&nbsp;&nbsp;<a href="/jobSeeker/job/${x.id}">${x.name}</a></li>
+                                            <#if x_index == 0>
+                                                <li><i class="layui-badge-rim layui-bg-red">${x_index+1}</i>&nbsp;&nbsp;<a href="/jobSeeker/job/${x.id}">${x.name}</a></li>
+                                            <#elseif x_index == 1>
+                                                <li><i class="layui-badge-rim layui-bg-orange">${x_index+1}</i>&nbsp;&nbsp;<a href="/jobSeeker/job/${x.id}">${x.name}</a></li>
+                                            <#elseif x_index == 2>
+                                                <li><i class="layui-badge-rim layui-bg-green">${x_index+1}</i>&nbsp;&nbsp;<a href="/jobSeeker/job/${x.id}">${x.name}</a></li>
+                                            <#else >
+                                               <li><i class="layui-badge-rim">${x_index+1}</i>&nbsp;&nbsp;<a href="/jobSeeker/job/${x.id}">${x.name}</a></li>
+                                            </#if>
+
                                         </#list>
                                     </@jobList>
 
