@@ -45,14 +45,14 @@
                     </li>
 
                     <li class="layui-nav-item">
-                        <a href="javascript:;"><i class="fa fa-user"></i>职位</a>
+                        <a href="javascript:;"><i class="fa fa-user"></i>需求</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" data-url="${ctx!}/admin/addcollege/index" data-id="1">发布职位</a></dd>
-                            <dd><a href="javascript:;" data-url="${ctx!}/admin/college/index" data-id="2">职位管理</a></dd>
+                            <dd><a href="javascript:;" data-url="${ctx!}/college/addreq/index" data-id="1">发布需求</a></dd>
+                            <dd><a href="javascript:;" data-url="${ctx!}/college/managereq/index" data-id="2">需求管理</a></dd>
                         </dl>
-                        <a href="javascript:;"><i class="fa fa-user"></i>投递</a>
+                        <a href="javascript:;"><i class="fa fa-user"></i>审核</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" data-url="${ctx!}/admin/addcollege/index" data-id="1">投递管理</a></dd>
+                            <dd><a href="javascript:;" data-url="${ctx!}/college/shenhe/index" data-id="1">待审核</a></dd>
                         </dl>
                     </li>
                 </ul>

@@ -4,10 +4,7 @@ import com.jcohy.lang.StringUtils;
 import com.jcohy.recruit.common.JsonResult;
 import com.jcohy.recruit.common.PageJson;
 import com.jcohy.recruit.model.*;
-import com.jcohy.recruit.service.CollegeService;
-import com.jcohy.recruit.service.DeliveryRecordService;
-import com.jcohy.recruit.service.JobService;
-import com.jcohy.recruit.service.ResumeService;
+import com.jcohy.recruit.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +30,9 @@ public class CollegeController extends BaseController{
 
     @Autowired
     private DeliveryRecordService deliveryRecordService;
+
+    @Autowired
+    private RequirementService requirementService;
 
 
     /**
@@ -248,6 +248,37 @@ public class CollegeController extends BaseController{
     }
 
 
+    /**
+     * 添加一条hc
+     * @param requirement
+     * @return
+     */
+    @PostMapping("/addHc")
+    @ResponseBody
+    public JsonResult addHc(Requirement requirement){
+        try {
+            Requirement req = requirementService.saveOrUpdate(requirement);
+            return JsonResult.ok().set("data", req);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.fail(e.getMessage());
+        }
+    }
+
+
+
+    @GetMapping("/hcList")
+    @ResponseBody
+    public PageJson<Requirement> hcList(@SessionAttribute("user")Admin teacher, ModelMap map){
+        PageRequest pageRequest = getPageRequest();
+        Page<Requirement> plans = requirementService.findAll(pageRequest);
+        PageJson<Requirement> page = new PageJson<>();
+        page.setCode(0);
+        page.setMsg("成功");
+        page.setCount(plans.getSize());
+        page.setData(plans.getContent());
+        return page;
+    }
 
 
 }

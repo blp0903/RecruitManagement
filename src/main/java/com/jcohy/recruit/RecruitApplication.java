@@ -40,6 +40,13 @@ public class RecruitApplication extends WebMvcConfigurerAdapter {
 
 		registry.addViewController("/admin/addcollege/index").setViewName("/admin/addcollege/index");
 
+		registry.addViewController("/college/addreq/index").setViewName("/college/addreq/index");
+
+		registry.addViewController("/college/managereq/index").setViewName("/college/managereq/index");
+
+		registry.addViewController("/college/shenhe/index").setViewName("/college/shenhe/index");
+
+
 		//学院主页，从登录
 		registry.addViewController("/college/main").setViewName("/college/main");
 

@@ -3,7 +3,7 @@
 <html >
 <head>
     <meta charset="utf-8" />
-    <title>西安工业大学招聘管理系统后台管理系统</title>
+    <title>西安工业大学招聘管理系统人事处</title>
     <link rel="shortcut icon" href="${ctx}/images/jcohy.png" type="image/x-icon">
     <!-- layui.css -->
     <link href="${ctx!}/js/plugins/layui/css/layui.css" rel="stylesheet" />
@@ -24,7 +24,7 @@
                     <a class="ht-user-name">${role}</a>
                 </div>
             </div>
-            <span class="sys-title">西安工业大学招聘管理系统后台管理系统</span>
+            <span class="sys-title">西安工业大学招聘管理系统人事处</span>
             <ul class="ht-nav">
                 <li class="ht-nav-item">
                     <a id="updatePassword" style="cursor: pointer"><i class="fa fa-power-off fa-fw"></i>修改密码</a>
