@@ -193,6 +193,6 @@ CREATE TABLE `requirement` (
   `req_status` int(1) DEFAULT '0',
   `create_time` timestamp(0) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_college_id` (`college_id`),
-  CONSTRAINT `fk_college_id` FOREIGN KEY (`college_id`) REFERENCES `college` (`id`)
+  KEY `rq_college_id` (`college_id`),
+  CONSTRAINT `rq_college_id` FOREIGN KEY (`college_id`) REFERENCES `college` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
