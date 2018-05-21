@@ -59,6 +59,14 @@
                             <dd><a href="javascript:;" data-url="${ctx!}/admin/college/index" data-id="4">学院账户管理</a></dd>
                         </dl>
                     </li>
+
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="fa fa-user"></i>招聘信息管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" data-url="${ctx!}/admin/managereq/index" data-id="5">发布招聘信息</a></dd>
+                        </dl>
+                    </li>
+
                 </ul>
             </div>
         </div>

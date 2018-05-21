@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -201,12 +202,50 @@ public class CollegeController extends BaseController{
         List<DeliveryRecord> mine = new ArrayList<>();
         for (DeliveryRecord deliveryRecord : all) {
             if (deliveryRecord.getJob().getCollege().getId() == id ) {
-                if (deliveryRecord.getStatus()!=null&&!deliveryRecord.getStatus().equals("5"))
-                    break;
-                mine.add(deliveryRecord);
+                if (deliveryRecord.getStatus()!=null){
+                    mine.add(deliveryRecord);
+                }
             }
         }
         return JsonResult.ok("获取成功").set("data", mine);
+    }
+
+    /**
+     * 获取全部投递
+     * @param id 学院id
+     * @return
+     */
+    @GetMapping("/deliverys/list")
+    @ResponseBody
+    public PageJson<DeliveryRecord> all(Integer id){
+        PageRequest pageRequest = getPageRequest();
+        Page<DeliveryRecord> deliveryRecords = deliveryRecordService.findAll(pageRequest);
+        List<DeliveryRecord> mine = new ArrayList<>();
+        for (DeliveryRecord deliveryRecord : deliveryRecords.getContent()) {
+            if (deliveryRecord.getJob().getCollege().getId() == id ) {
+                if (deliveryRecord.getStatus()!=null){
+                    mine.add(deliveryRecord);
+                }
+            }
+        }
+        PageJson<DeliveryRecord> page = new PageJson<>();
+        page.setCode(0);
+        page.setMsg("成功");
+        page.setCount(mine.size());
+        page.setData(mine);
+        return page;
+    }
+
+    @GetMapping("/change/{id}")
+    @ResponseBody
+    public JsonResult change(@PathVariable("id") Integer id){
+        try {
+            deliveryRecordService.changeStatus(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.fail("修改失败");
+        }
+        return JsonResult.ok();
     }
 
     /**
@@ -280,5 +319,14 @@ public class CollegeController extends BaseController{
         return page;
     }
 
-
+    @DeleteMapping("/deliverys/{id}")
+    public JsonResult del(@PathVariable Integer id){
+        try {
+            deliveryRecordService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.fail("删除失败");
+        }
+        return JsonResult.ok();
+    }
 }

@@ -56,4 +56,11 @@ public class DeliveryRecordServiceImpl implements DeliveryRecordService {
         }
         deliveryRecordRepository.deleteById(id);
     }
+
+    @Override
+    public void changeStatus(Integer id) {
+        DeliveryRecord deliveryRecord = findById(id);
+        deliveryRecord.setStatus(deliveryRecord.getStatus()==0?1:0);
+        deliveryRecordRepository.save(deliveryRecord);
+    }
 }

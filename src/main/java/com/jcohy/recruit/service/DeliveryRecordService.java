@@ -56,4 +56,5 @@ public interface DeliveryRecordService {
      */
     void delete(Integer id);
 
+    void changeStatus(Integer id);
 }

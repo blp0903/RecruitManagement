@@ -43,25 +43,20 @@
     </button>
     <div class="layui-row">
         <div class="layui-form layui-col-md12 star-so">
-            <#--<input class="layui-input" placeholder="请输入关键字" name="keyword" id="keyword">-->
             <input type="hidden" value="${Session.user.id?c}" id="id">
-            <#--<button class="layui-btn" id="search" "><i class="layui-icon">&#xe615;</i></button>-->
         </div>
     </div>
 
 
     <div class="layui-field-box">
         <div id="dataContent" class="">
-            <table class="layui-hide" id="deliverys" lay-filter="table"></table>
+            <table class="layui-hide" id="hclist" lay-filter="table"></table>
 
             <script type="text/html" id="operator">
                 {{#  if(d.status == 1 ){ }}
-                <a class="layui-btn layui-btn-normal" lay-event="detail">查看简历</a>
                 <a class="layui-btn " lay-event="recall">撤回</a>
-                <a class="layui-btn layui-btn-danger " lay-event="del">删除</a>
                 {{#  }else{ }}
-                <a class="layui-btn layui-btn-normal" lay-event="detail">查看简历</a>
-                <a class="layui-btn " lay-event="pass">通过</a>
+                <a class="layui-btn " lay-event="pass">发布</a>
                 <a class="layui-btn layui-btn-danger " lay-event="del">删除</a>
                 {{# } }}
             </script>
@@ -78,33 +73,28 @@
                 table  = layui.table ;
         var id = $("#id").val();
         table.render({
-            elem: '#deliverys'
+            elem: '#hclist'
             ,height: 'full-200'
             ,method:'GET'
             ,url: '/college/hcList' //数据接口
             ,page: true //开启分页
             ,cols: [[ //表头
-                {field: 'name', align:'center', title: '姓名',unresize:true,templet: '<div>{{d.jobSeeker.name}}</div>'}
-                ,{field: 'sum', align:'center', title: '学号',unresize:true,templet: '<div>{{d.jobSeeker.num}}</div>'}
-                ,{field: 'sex', align:'center', title: '性别',unresize:true,templet: '<div>{{d.jobSeeker.sex}}</div>'}
-                ,{field: 'phone', align:'center', title: '电话',unresize:true,templet: '<div>{{d.jobSeeker.phone}}</div>'}
-                ,{field: 'email', align:'center', title: '邮箱',unresize:true,templet: '<div>{{d.jobSeeker.email}}</div>'}
-                ,{field: 'moneyResource', align:'center', title: '教育经历',unresize:true,templet: '<div>{{d.jobSeeker.resume.education}}</div>'}
-                ,{fixed: 'right',  title:'操作',align:'center', width:'300',toolbar: '#operator',unresize:true}
+                {field: 'num', align:'center', title: '需求编号',unresize:true}
+                ,{field: 'name', align:'center', title: '岗位名称',unresize:true}
+                ,{field: 'title', align:'center', title: '岗位级别',unresize:true}
+                ,{field: 'location', align:'center', title: '地点',unresize:true}
+                ,{field: 'numbers', align:'center', title: '数量',unresize:true}
+                ,{field: 'experience', align:'center', title: '经历要求',unresize:true}
+                ,{field: 'desc', align:'center', title: '岗位描述',unresize:true}
+                ,{fixed: 'right',  title:'操作',align:'center', toolbar: '#operator',unresize:true}
             ]]
         });
 
         //监听工具条
         table.on('tool(table)', function(obj){
             var data = obj.data;
-            if(obj.event === 'detail'){
-                if($("#detail-view-"+data.id).length > 0){
-                    $("#detail-view-"+data.id).hide();
-                    $("#detail-view-"+data.id).remove();
-                }else{
-                    createHtml(obj);
-                    $("#detail-view-"+data.id).show();
-                }
+            if(obj.event === 'public'){
+
             }else if(obj.event ==='pass'){
                 changeStatus(data.id);
             }else if(obj.event ==='recall'){
@@ -116,19 +106,19 @@
 
         function changeStatus(id) {
             $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: "/college/change/" + id,
-                    success: function (ret) {
-                        if (ret.isOk) {
-                            layer.msg("操作成功", {time: 2000}, function () {
-                                window.location.href = "/college/shenhe/index";
-                            });
-                        } else {
-                            layer.msg(ret.msg, {time: 2000});
-                        }
+                type: "GET",
+                dataType: "json",
+                url: "/college/addJob/" + id,
+                success: function (ret) {
+                    if (ret.isOk) {
+                        layer.msg("操作成功", {time: 2000}, function () {
+                            window.location.href = "/college/shenhe/index";
+                        });
+                    } else {
+                        layer.msg(ret.msg, {time: 2000});
                     }
-                });
+                }
+            });
         }
 
 

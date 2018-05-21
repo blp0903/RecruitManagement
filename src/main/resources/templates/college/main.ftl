@@ -8,7 +8,7 @@
     <!-- layui.css -->
     <link href="${ctx!}/js/plugins/layui/css/layui.css" rel="stylesheet" />
     <!-- font-awesome.css -->
-    <link href="${ctx!}/css/font-awesome.css" rel="stylesheet" />
+    <link href="${ctx!}/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- animate.css -->
     <link href="${ctx!}/css/animate.min.css" rel="stylesheet" />
     <!-- 本页样式 -->
@@ -52,7 +52,7 @@
                         </dl>
                         <a href="javascript:;"><i class="fa fa-user"></i>审核</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" data-url="${ctx!}/college/shenhe/index" data-id="1">待审核</a></dd>
+                            <dd><a href="javascript:;" data-url="${ctx!}/college/shenhe/index" data-id="3">待审核</a></dd>
                         </dl>
                     </li>
                 </ul>
