@@ -46,6 +46,9 @@ public class DeliveryRecordServiceImpl implements DeliveryRecordService {
 
     @Override
     public DeliveryRecord saveOrUpdate(DeliveryRecord deliveryRecord) throws ServiceException {
+        if(deliveryRecord.getId() == null){
+            deliveryRecord.setStatus(0);
+        }
         return deliveryRecordRepository.save(deliveryRecord);
     }
 
@@ -58,9 +61,14 @@ public class DeliveryRecordServiceImpl implements DeliveryRecordService {
     }
 
     @Override
-    public void changeStatus(Integer id) {
+    public void changeStatus(Integer id,String type) {
         DeliveryRecord deliveryRecord = findById(id);
-        deliveryRecord.setStatus(deliveryRecord.getStatus()==0?1:0);
+        deliveryRecord.setStatus(Integer.parseInt(type));
         deliveryRecordRepository.save(deliveryRecord);
+    }
+
+    @Override
+    public List<DeliveryRecord> findByStatus(Integer status) {
+        return deliveryRecordRepository.findAllByStatusGreaterThanEqual(status);
     }
 }

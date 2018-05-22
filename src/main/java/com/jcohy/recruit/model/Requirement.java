@@ -137,7 +137,7 @@ public class Requirement implements Serializable {
     private Integer status;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "create_time")
     private Date createTime;
 

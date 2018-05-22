@@ -56,5 +56,7 @@ public interface DeliveryRecordService {
      */
     void delete(Integer id);
 
-    void changeStatus(Integer id);
+    void changeStatus(Integer id,String type);
+
+    List<DeliveryRecord> findByStatus(Integer status);
 }

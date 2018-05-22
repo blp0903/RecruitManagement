@@ -172,9 +172,6 @@ public class CollegeController extends BaseController{
         }
     }
 
-
-
-
     /**
      * 删除job
      * @param job
@@ -217,13 +214,14 @@ public class CollegeController extends BaseController{
      */
     @GetMapping("/deliverys/list")
     @ResponseBody
-    public PageJson<DeliveryRecord> all(Integer id){
+    public PageJson<DeliveryRecord> all(Integer id,String type){
         PageRequest pageRequest = getPageRequest();
-        Page<DeliveryRecord> deliveryRecords = deliveryRecordService.findAll(pageRequest);
+
+        List<DeliveryRecord> deliveryRecords = deliveryRecordService.findByStatus(Integer.parseInt(type));
         List<DeliveryRecord> mine = new ArrayList<>();
-        for (DeliveryRecord deliveryRecord : deliveryRecords.getContent()) {
+        for (DeliveryRecord deliveryRecord : deliveryRecords) {
             if (deliveryRecord.getJob().getCollege().getId() == id ) {
-                if (deliveryRecord.getStatus()!=null){
+                if (deliveryRecord.getStatus()!=null&&deliveryRecord.getStatus()==Integer.parseInt(type)){
                     mine.add(deliveryRecord);
                 }
             }
@@ -238,9 +236,9 @@ public class CollegeController extends BaseController{
 
     @GetMapping("/change/{id}")
     @ResponseBody
-    public JsonResult change(@PathVariable("id") Integer id){
+    public JsonResult change(@PathVariable("id") Integer id,String type){
         try {
-            deliveryRecordService.changeStatus(id);
+            deliveryRecordService.changeStatus(id,type);
         } catch (Exception e) {
             e.printStackTrace();
             return JsonResult.fail("修改失败");
@@ -303,8 +301,6 @@ public class CollegeController extends BaseController{
             return JsonResult.fail(e.getMessage());
         }
     }
-
-
 
     @GetMapping("/hcList")
     @ResponseBody

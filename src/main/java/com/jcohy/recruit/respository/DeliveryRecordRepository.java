@@ -12,4 +12,6 @@ public interface DeliveryRecordRepository extends JpaRepository<DeliveryRecord,I
 
 
     List<DeliveryRecord> findDeliveryListRecordByNum(Integer num);
+
+    List<DeliveryRecord> findAllByStatusGreaterThanEqual(Integer status);
 }

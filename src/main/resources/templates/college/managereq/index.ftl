@@ -44,8 +44,23 @@
 
             <table class="layui-hide" id="plan" lay-filter="table"></table>
             <script type="text/html" id="operator">
-                <#--<a class="layui-btn" lay-event="edit">编辑</a>-->
                 <a class="layui-btn layui-btn-danger " lay-event="del">删除</a>
+            </script>
+
+            <script type="text/html" id="status">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item" style="margin:0;">
+                        {{#  if(d.status == 0){ }}
+                        <span class="sys-title">请求已发布，待审核</span>
+                        {{#  } else if(d.status == 1){ }}
+                        <span class="sys-title">请求已通过，招聘信息未发布</span>
+                        {{#  } else if(d.status == 2){ }}
+                        <span class="sys-title">请求已通过，招聘信息已发布</span>
+                        {{#  } else if(d.status == 3){ }}
+                        <span class="sys-title">请求已拒绝</span>
+                        {{#  } }}
+                    </div>
+                </form>
             </script>
         </div>
     </div>

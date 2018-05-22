@@ -63,7 +63,8 @@
                     <li class="layui-nav-item">
                         <a href="javascript:;"><i class="fa fa-user"></i>招聘信息管理</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" data-url="${ctx!}/admin/managereq/index" data-id="5">发布招聘信息</a></dd>
+                            <dd><a href="javascript:;" data-url="${ctx!}/admin/managereq/index" data-id="5">请求管理审核</a></dd>
+                            <dd><a href="javascript:;" data-url="${ctx!}/admin/managereq/index" data-id="6">应聘人员审核</a></dd>
                         </dl>
                     </li>
 

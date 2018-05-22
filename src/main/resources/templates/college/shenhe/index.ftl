@@ -43,9 +43,9 @@
     </button>
     <div class="layui-row">
         <div class="layui-form layui-col-md12 star-so">
-            <#--<input class="layui-input" placeholder="请输入关键字" name="keyword" id="keyword">-->
+        <#--<input class="layui-input" placeholder="请输入关键字" name="keyword" id="keyword">-->
             <input type="hidden" value="${Session.user.id?c}" id="id">
-            <#--<button class="layui-btn" id="search" "><i class="layui-icon">&#xe615;</i></button>-->
+        <#--<button class="layui-btn" id="search" "><i class="layui-icon">&#xe615;</i></button>-->
         </div>
     </div>
 
@@ -53,16 +53,18 @@
     <div class="layui-field-box">
         <div id="dataContent" class="">
             <table class="layui-hide" id="deliverys" lay-filter="table"></table>
-
             <script type="text/html" id="operator">
-                {{#  if(d.status == 1 ){ }}
+                {{#  if(d.status == 2 ){ }}
                 <a class="layui-btn layui-btn-normal" lay-event="detail">查看简历</a>
-                <a class="layui-btn " lay-event="recall">撤回</a>
-                <a class="layui-btn layui-btn-danger " lay-event="del">删除</a>
-                {{#  }else{ }}
-                <a class="layui-btn layui-btn-normal" lay-event="detail">查看简历</a>
+                <a class="layui-btn " lay-event="recall">拒绝</a>
                 <a class="layui-btn " lay-event="pass">通过</a>
                 <a class="layui-btn layui-btn-danger " lay-event="del">删除</a>
+                {{#  }else if(d.status == 3 ){ }}
+                <button class="layui-btn layui-btn-disabled" disabled>已通过</button>
+                <a class="layui-btn layui-btn-normal" lay-event="detail">查看简历</a>
+                {{#  }else if(d.status == 4 ){ }}
+                <button class="layui-btn layui-btn-disabled" disabled>已拒绝</button>
+                <a class="layui-btn layui-btn-normal" lay-event="detail">查看简历</a>
                 {{# } }}
             </script>
         </div>
@@ -81,7 +83,7 @@
             elem: '#deliverys'
             ,height: 'full-200'
             ,method:'GET'
-            ,url: '/college/hcList' //数据接口
+            ,url: '/college/deliverys/list?id='+id+"&type=2" //数据接口
             ,page: true //开启分页
             ,cols: [[ //表头
                 {field: 'name', align:'center', title: '姓名',unresize:true,templet: '<div>{{d.jobSeeker.name}}</div>'}
@@ -90,7 +92,7 @@
                 ,{field: 'phone', align:'center', title: '电话',unresize:true,templet: '<div>{{d.jobSeeker.phone}}</div>'}
                 ,{field: 'email', align:'center', title: '邮箱',unresize:true,templet: '<div>{{d.jobSeeker.email}}</div>'}
                 ,{field: 'moneyResource', align:'center', title: '教育经历',unresize:true,templet: '<div>{{d.jobSeeker.resume.education}}</div>'}
-                ,{fixed: 'right',  title:'操作',align:'center', width:'300',toolbar: '#operator',unresize:true}
+                ,{fixed: 'right',  title:'操作',align:'center', width:'350',toolbar: '#operator',unresize:true}
             ]]
         });
 
@@ -106,29 +108,29 @@
                     $("#detail-view-"+data.id).show();
                 }
             }else if(obj.event ==='pass'){
-                changeStatus(data.id);
+                changeStatus(data.id,3);
             }else if(obj.event ==='recall'){
-                changeStatus(data.id);
+                changeStatus(data.id,4);
             }else if(obj.event ==='del') {
                 del(data.id);
             }
         });
 
-        function changeStatus(id) {
+        function changeStatus(id,type) {
             $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: "/college/change/" + id,
-                    success: function (ret) {
-                        if (ret.isOk) {
-                            layer.msg("操作成功", {time: 2000}, function () {
-                                window.location.href = "/college/shenhe/index";
-                            });
-                        } else {
-                            layer.msg(ret.msg, {time: 2000});
-                        }
+                type: "GET",
+                dataType: "json",
+                url: "/college/change/" + id+"?type="+type,
+                success: function (ret) {
+                    if (ret.isOk) {
+                        layer.msg("操作成功", {time: 2000}, function () {
+                            window.location.href = "/college/shenhe/index";
+                        });
+                    } else {
+                        layer.msg(ret.msg, {time: 2000});
                     }
-                });
+                }
+            });
         }
 
 

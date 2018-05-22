@@ -42,4 +42,7 @@ public interface RequirementService {
      */
     void delete(Integer id);
 
+    void changeStatus(Integer id,String type);
+
+    List<Requirement> findByStatus(Integer status);
 }

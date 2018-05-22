@@ -18,9 +18,9 @@ layui.define([ 'layer',  'table','common','util'], function (exports) {
             ,{field: 'numbers', align:'center', title: '数量',unresize:true}
             ,{field: 'experience', align:'center', title: '经历要求',unresize:true}
             ,{field: 'desc', align:'center', title: '岗位描述',unresize:true}
-            ,{field: 'create_time', align:'center', title: '更新时间',unresize:true,templet: '<div>{{# if(d.updateTime!=null){ }}{{ layui.util.toDateString(d.updateTime) }}{{# } }}</div>'}
-            ,{field: 'status', align:'center', title: '状态',unresize:true}
-            ,{fixed: 'right',  title:'操作',align:'center', toolbar: '#operator',unresize:true}
+            ,{field: 'create_time', align:'center', title: '创建时间',unresize:true,templet: '<div>{{# if(d.createTime!=null){ }}{{ layui.util.toDateString(d.createTime) }}{{# } }}</div>'}
+            ,{field: 'status', align:'center', title: '状态',templet: '#status',unresize:true}
+            ,{fixed: 'right', title:'操作',align:'center',width:'200',toolbar: '#operator',unresize:true}
         ]]
     });
 
@@ -69,5 +69,5 @@ layui.define([ 'layer',  'table','common','util'], function (exports) {
             });
         });
     }
-    exports('admin/college/index', datalist);
+    exports('college/index', datalist);
 });

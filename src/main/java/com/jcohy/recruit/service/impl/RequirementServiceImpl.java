@@ -63,4 +63,16 @@ public class RequirementServiceImpl implements RequirementService {
         }
         requirementRespository.deleteById(id);
     }
+
+    @Override
+    public void changeStatus(Integer id, String type) {
+        Requirement requirement = findById(id);
+        requirement.setStatus(Integer.parseInt(type));
+        requirementRespository.saveAndFlush(requirement);
+    }
+
+    @Override
+    public List<Requirement> findByStatus(Integer status) {
+        return requirementRespository.findAllByStatusGreaterThanEqual(status);
+    }
 }

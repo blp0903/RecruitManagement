@@ -51,15 +51,32 @@
     <div class="layui-field-box">
         <div id="dataContent" class="">
             <table class="layui-hide" id="hclist" lay-filter="table"></table>
-
             <script type="text/html" id="operator">
-                {{#  if(d.status == 1 ){ }}
-                <a class="layui-btn " lay-event="recall">撤回</a>
-                {{#  }else{ }}
-                <a class="layui-btn " lay-event="pass">发布</a>
-                <a class="layui-btn layui-btn-danger " lay-event="del">删除</a>
+                {{#  if(d.status == 0 ){ }}
+                <a class="layui-btn " lay-event="pass">通过</a>
+                <a class="layui-btn " lay-event="recall">拒绝</a>
+                {{#  }else if(d.status == 1 ){ }}
+                <a class="layui-btn " lay-event="public">发布</a>
+                {{#  }else if(d.status == 2 ){ }}
+                <a class="layui-btn " lay-event="republic">撤销发布</a>
                 {{# } }}
             </script>
+            <script type="text/html" id="status">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item" style="margin:0;">
+                        {{#  if(d.status == 0){ }}
+                        <span class="sys-title">等待审核</span>
+                        {{#  } else if(d.status == 1){ }}
+                        <span class="sys-title">请求已通过，招聘信息未发布</span>
+                        {{#  } else if(d.status == 2){ }}
+                        <span class="sys-title">请求已通过，招聘信息已发布</span>
+                        {{#  } else if(d.status == 3){ }}
+                        <span class="sys-title">请求已拒绝</span>
+                        {{#  } }}
+                    </div>
+                </form>
+            </script>
+
         </div>
     </div>
 </fieldset>
@@ -72,6 +89,7 @@
         var $ = layui.jquery,
                 table  = layui.table ;
         var id = $("#id").val();
+        var treatment = 0;
         table.render({
             elem: '#hclist'
             ,height: 'full-200'
@@ -80,12 +98,14 @@
             ,page: true //开启分页
             ,cols: [[ //表头
                 {field: 'num', align:'center', title: '需求编号',unresize:true}
+                ,{field: 'name', align:'center', title: '学院名称',unresize:true,template:"<div> {{d.college.name}}</div>"}
                 ,{field: 'name', align:'center', title: '岗位名称',unresize:true}
                 ,{field: 'title', align:'center', title: '岗位级别',unresize:true}
                 ,{field: 'location', align:'center', title: '地点',unresize:true}
                 ,{field: 'numbers', align:'center', title: '数量',unresize:true}
                 ,{field: 'experience', align:'center', title: '经历要求',unresize:true}
                 ,{field: 'desc', align:'center', title: '岗位描述',unresize:true}
+                ,{field: 'status', align:'center', title: '状态',templet: '#status',unresize:true}
                 ,{fixed: 'right',  title:'操作',align:'center', toolbar: '#operator',unresize:true}
             ]]
         });
@@ -94,21 +114,33 @@
         table.on('tool(table)', function(obj){
             var data = obj.data;
             if(obj.event === 'public'){
-
+                changeStatus(id,2)
             }else if(obj.event ==='pass'){
-                changeStatus(data.id);
+                changeStatus(data.id,1);
             }else if(obj.event ==='recall'){
-                changeStatus(data.id);
+                changeStatus(data.id,3);
             }else if(obj.event ==='del') {
                 del(data.id);
             }
         });
 
-        function changeStatus(id) {
+        function changeStatus(id,type) {
+            if(type === 2){
+                layer.prompt('请输入每月的薪资',function(val, index){
+                    treatment = val;
+                    change(id,type);
+                });
+            }else{
+                change(id,type);
+            }
+
+        }
+
+        function change(id, type) {
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: "/college/addJob/" + id,
+                url: "/college/addJob/" + id+"&type="+type+"&treatment="+treatment,
                 success: function (ret) {
                     if (ret.isOk) {
                         layer.msg("操作成功", {time: 2000}, function () {
@@ -120,7 +152,6 @@
                 }
             });
         }
-
 
         function del(id) {
             layer.confirm('真的删除行么', function (index) {
