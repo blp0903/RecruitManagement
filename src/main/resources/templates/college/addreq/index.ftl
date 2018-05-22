@@ -35,64 +35,34 @@
     <div class="layui-form-item">
         <label class="layui-form-label">需求编号</label>
         <div class="layui-input-inline">
-            <input type="text" name="num" lay-verify="required" placeholder="请输入需求编号" value=""
+            <input type="text" name="num" lay-verify="number" placeholder="请输入需求编号" value=""
                    autocomplete="off" class="layui-input">
         </div>
     </div>
 
 
     <div class="layui-form-item">
-        <label class="layui-form-label">职位名称</label>
+        <label class="layui-form-label">需求名称</label>
         <div class="layui-input-inline">
             <input type="text" name="name" lay-verify="name" placeholder="请输入职位名称" value=""
                    autocomplete="off" class="layui-input">
         </div>
     </div>
 
-
     <div class="layui-form-item">
-        <label class="layui-form-label">职位级别</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" lay-verify="title" placeholder="请输入职位级别" value=""
-                   autocomplete="off" class="layui-input">
+        <label class="layui-form-label">需求描述：</label>
+        <div class="layui-input-block">
+            <textarea id="description" name="desc" placeholder="请输入内容：必填" lay-verify="required" class="layui-textarea" style="width: 60%"></textarea>
         </div>
     </div>
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">工作地点</label>
-        <div class="layui-input-inline">
-            <input type="text" name="location" lay-verify="location" placeholder="请输入工作地点" value=""
-                   autocomplete="off" class="layui-input">
-        </div>
-    </div>
-
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">人数</label>
-        <div class="layui-input-inline">
-            <input type="text" name="numbers" lay-verify="numbers" placeholder="请输入招聘人数" value=""
-                   autocomplete="off" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">经验要求</label>
-        <div class="layui-input-inline">
-            <input type="text" name="experience" lay-verify="experience" placeholder="请输入经验要求" value=""
-                   autocomplete="off" class="layui-input">
-        </div>
-    </div>
-
-
-
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">岗位描述</label>
-        <div class="layui-input-inline">
-            <input type="text" name="desc" lay-verify="desc" placeholder="请输入岗位描述" value=""
-                   autocomplete="off" class="layui-input">
-        </div>
-    </div>
+    <#--<div class="layui-form-item">-->
+        <#--<label class="layui-form-label">需求描述</label>-->
+        <#--<div class="layui-input-inline">-->
+            <#--<input type="text" name="desc" lay-verify="desc" placeholder="请输入岗位描述" value=""-->
+                   <#--autocomplete="off" class="layui-input">-->
+        <#--</div>-->
+    <#--</div>-->
 
     <div class="layui-form-item">
         <button class="layui-btn" lay-submit lay-filter="add">立即提交</button>

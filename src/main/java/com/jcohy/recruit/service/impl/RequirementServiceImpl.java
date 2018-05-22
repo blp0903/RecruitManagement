@@ -36,21 +36,19 @@ public class RequirementServiceImpl implements RequirementService {
     }
 
     @Override
-    public Requirement saveOrUpdate(Requirement job) throws ServiceException {
+    public Requirement saveOrUpdate(Requirement requirement) throws ServiceException {
         Requirement dbUser = null;
-        if(job.getId() != null){
-            dbUser = findById(job.getId());
-            if(job.getCollege() != null ) dbUser.setCollege(job.getCollege());
-            if(job.getName() != null ) dbUser.setName(job.getName());
-            if(job.getTitle() != null ) dbUser.setTitle(job.getTitle());
-            if(job.getDesc() != null ) dbUser.setDesc(job.getDesc());
-            if(job.getNum() != null ) dbUser.setNum(job.getNum());
-            if(job.getStatus() != null ) dbUser.setStatus(job.getStatus());
-            if(job.getLocation() != null ) dbUser.setLocation(job.getLocation());
-            if(job.getNumbers() != null ) dbUser.setNumbers(job.getNumbers());
-            if(job.getExperience() != null ) dbUser.setExperience(job.getExperience());
+        if(requirement.getId() != null){
+            dbUser = findById(requirement.getId());
+            if(requirement.getCollege() != null ) dbUser.setCollege(requirement.getCollege());
+            if(requirement.getName() != null ) dbUser.setName(requirement.getName());
+            if(requirement.getDesc() != null ) dbUser.setDesc(requirement.getDesc());
+            if(requirement.getNum() != null ) dbUser.setNum(requirement.getNum());
+            if(requirement.getStatus() != null ) dbUser.setStatus(requirement.getStatus());
+            if(requirement.getReason() != null ) dbUser.setReason(requirement.getReason());
         }else{
-            dbUser = job;
+            dbUser = requirement;
+            dbUser.setStatus(0);
         }
         dbUser.setCreateTime(new Date());
         return requirementRespository.save(dbUser);
@@ -65,8 +63,10 @@ public class RequirementServiceImpl implements RequirementService {
     }
 
     @Override
-    public void changeStatus(Integer id, String type) {
+    public void changeStatus(Integer id, String type,String reason) {
+
         Requirement requirement = findById(id);
+        requirement.setReason(reason);
         requirement.setStatus(Integer.parseInt(type));
         requirementRespository.saveAndFlush(requirement);
     }

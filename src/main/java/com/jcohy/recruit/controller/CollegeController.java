@@ -216,13 +216,16 @@ public class CollegeController extends BaseController{
     @ResponseBody
     public PageJson<DeliveryRecord> all(Integer id,String type){
         PageRequest pageRequest = getPageRequest();
-
         List<DeliveryRecord> deliveryRecords = deliveryRecordService.findByStatus(Integer.parseInt(type));
         List<DeliveryRecord> mine = new ArrayList<>();
-        for (DeliveryRecord deliveryRecord : deliveryRecords) {
-            if (deliveryRecord.getJob().getCollege().getId() == id ) {
-                if (deliveryRecord.getStatus()!=null&&deliveryRecord.getStatus()==Integer.parseInt(type)){
-                    mine.add(deliveryRecord);
+        if(Integer.parseInt(type)<2){
+            mine = deliveryRecords;
+        }else{
+            for (DeliveryRecord deliveryRecord : deliveryRecords) {
+                if (deliveryRecord.getJob().getCollege().getId() == id ) {
+                    if (deliveryRecord.getStatus()!=null&&deliveryRecord.getStatus()==Integer.parseInt(type)){
+                        mine.add(deliveryRecord);
+                    }
                 }
             }
         }

@@ -59,4 +59,6 @@ public interface DeliveryRecordService {
     void changeStatus(Integer id,String type);
 
     List<DeliveryRecord> findByStatus(Integer status);
+
+    List<DeliveryRecord> findByStatusBetween(int max, int min);
 }

@@ -33,6 +33,10 @@ public class Job implements Serializable {
     @JoinColumn(name = "college_id")
     private College college;
 
+    @OneToOne
+    @JoinColumn(name = "reqiured_id")
+    private Requirement requirement;
+
     @Column(name = "name")
     private String name;
 
@@ -81,8 +85,16 @@ public class Job implements Serializable {
     @Column(name = "job_status")
     private Integer status;
 
+    public Requirement getRequirement() {
+        return requirement;
+    }
+
+    public void setRequirement(Requirement requirement) {
+        this.requirement = requirement;
+    }
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "create_time")
     private Date createTime;
 

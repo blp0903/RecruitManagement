@@ -25,7 +25,7 @@ public class JobDirective implements TemplateDirectiveModel{
     private JobService jobService;
     @Override
     public void execute(Environment environment, Map map, TemplateModel[] templateModels, TemplateDirectiveBody templateDirectiveBody) throws TemplateException, IOException {
-        List<Job> list = jobService.findAll();
+        List<Job> list = jobService.findAllByStatus();
         logger.warn("JobSeeker:{}",list.size());
         environment.setVariable("list", new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25).build().wrap(list));
         if (templateDirectiveBody != null) {

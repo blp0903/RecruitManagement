@@ -50,6 +50,8 @@
                             <dd><a href="javascript:;" data-url="${ctx!}/college/addreq/index" data-id="1">发布需求</a></dd>
                             <dd><a href="javascript:;" data-url="${ctx!}/college/managereq/index" data-id="2">需求管理</a></dd>
                         </dl>
+                    </li>
+                    <li class="layui-nav-item">
                         <a href="javascript:;"><i class="fa fa-user"></i>审核</a>
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;" data-url="${ctx!}/college/shenhe/index" data-id="3">待审核</a></dd>

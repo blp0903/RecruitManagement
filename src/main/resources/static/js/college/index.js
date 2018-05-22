@@ -12,12 +12,9 @@ layui.define([ 'layer',  'table','common','util'], function (exports) {
         ,page: true //开启分页
         ,cols: [[ //表头
             {field: 'num', align:'center', title: '需求编号',unresize:true}
-            ,{field: 'name', align:'center', title: '岗位名称',unresize:true}
-            ,{field: 'title', align:'center', title: '岗位级别',unresize:true}
-            ,{field: 'location', align:'center', title: '地点',unresize:true}
-            ,{field: 'numbers', align:'center', title: '数量',unresize:true}
-            ,{field: 'experience', align:'center', title: '经历要求',unresize:true}
-            ,{field: 'desc', align:'center', title: '岗位描述',unresize:true}
+            ,{field: 'name', align:'center', title: '需求标题',unresize:true}
+            ,{field: 'desc', align:'center', title: '需求描述',unresize:true}
+            ,{field: 'college', align:'center', title: '需求标题',unresize:true,templet: '<div>{{d.college.name}}</div>'}
             ,{field: 'create_time', align:'center', title: '创建时间',unresize:true,templet: '<div>{{# if(d.createTime!=null){ }}{{ layui.util.toDateString(d.createTime) }}{{# } }}</div>'}
             ,{field: 'status', align:'center', title: '状态',templet: '#status',unresize:true}
             ,{fixed: 'right', title:'操作',align:'center',width:'200',toolbar: '#operator',unresize:true}

@@ -69,6 +69,15 @@ public class DeliveryRecordServiceImpl implements DeliveryRecordService {
 
     @Override
     public List<DeliveryRecord> findByStatus(Integer status) {
-        return deliveryRecordRepository.findAllByStatusGreaterThanEqual(status);
+        if(status>2){
+            return deliveryRecordRepository.findAllByStatusGreaterThanEqual(status);
+        }else{
+            return findByStatusBetween(status,2);
+        }
+    }
+
+    @Override
+    public List<DeliveryRecord> findByStatusBetween(int min, int max) {
+        return deliveryRecordRepository.findAllByStatusBetween(min,max);
     }
 }

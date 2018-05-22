@@ -11,4 +11,5 @@ public interface JobRepository extends JpaRepository<Job,Integer> {
     @Query(value = "select * from job a where a.name like %?1%", nativeQuery = true)
     List<Job> findByName(String name);
 
+    List<Job> findByStatus(Integer status);
 }

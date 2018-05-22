@@ -45,38 +45,6 @@ public class Requirement implements Serializable {
         this.name = name;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getNumbers() {
-        return numbers;
-    }
-
-    public void setNumbers(String numbers) {
-        this.numbers = numbers;
-    }
-
-    public String getExperience() {
-        return experience;
-    }
-
-    public void setExperience(String experience) {
-        this.experience = experience;
-    }
-
     public String getDesc() {
         return desc;
     }
@@ -116,19 +84,6 @@ public class Requirement implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "job_title")
-    private String title;
-
-
-    @Column(name = "loction")
-    private String location;
-
-    @Column(name = "numbers")
-    private String numbers;
-
-    @Column(name = "work_experience")
-    private String experience;
-
     @Column(name = "description")
     private String desc;
 
@@ -136,9 +91,19 @@ public class Requirement implements Serializable {
     @Column(name = "req_status")
     private Integer status;
 
+    @Column(name = "reason")
+    private String reason;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.DATE)
     @Column(name = "create_time")
     private Date createTime;
 
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 }

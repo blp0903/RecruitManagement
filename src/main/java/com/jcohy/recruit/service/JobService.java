@@ -4,6 +4,7 @@ import com.jcohy.recruit.exception.ServiceException;
 import com.jcohy.recruit.model.Job;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -21,6 +22,11 @@ public interface JobService {
      */
     List<Job> findAll();
 
+    /**
+     *  查询
+     * @return
+     */
+    List<Job> findAllByStatus();
 
     /**
      * 模糊查询
@@ -51,4 +57,5 @@ public interface JobService {
      */
     void delete(Integer id);
 
+    void changeStatus(Integer id);
 }

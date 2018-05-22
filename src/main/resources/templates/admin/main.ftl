@@ -8,7 +8,7 @@
     <!-- layui.css -->
     <link href="${ctx!}/js/plugins/layui/css/layui.css" rel="stylesheet" />
     <!-- font-awesome.css -->
-    <link href="${ctx!}/css/font-awesome.css" rel="stylesheet" />
+    <link href="${ctx!}/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- animate.css -->
     <link href="${ctx!}/css/animate.min.css" rel="stylesheet" />
     <!-- 本页样式 -->
@@ -63,8 +63,9 @@
                     <li class="layui-nav-item">
                         <a href="javascript:;"><i class="fa fa-user"></i>招聘信息管理</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" data-url="${ctx!}/admin/managereq/index" data-id="5">请求管理审核</a></dd>
-                            <dd><a href="javascript:;" data-url="${ctx!}/admin/managereq/index" data-id="6">应聘人员审核</a></dd>
+                            <dd><a href="javascript:;" data-url="${ctx!}/admin/managereq/index" data-id="5">请求审核</a></dd>
+                            <dd><a href="javascript:;" data-url="${ctx!}/admin/job/index" data-id="6">职位管理</a></dd>
+                            <dd><a href="javascript:;" data-url="${ctx!}/admin/check/index" data-id="7">应聘人员审核</a></dd>
                         </dl>
                     </li>
 

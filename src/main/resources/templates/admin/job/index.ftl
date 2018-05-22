@@ -22,18 +22,30 @@
             padding-top: 4px;
             height: 45px;
         }
+        .star-so{
+             text-align: center;
+             margin-bottom: 10px;
+             margin-top: 40px;
+        }
+        .star-so input.layui-input{
+            width: 200px;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
 
 <fieldset id="dataList" class="layui-elem-field layui-field-title sys-list-field">
-    <legend style="text-align:center;">需求管理</legend>
+    <legend style="text-align:center;">我的项目</legend>
+
     <button class="layui-btn" style="position: relative;float: right;right: 100px;" onclick="javascript:location.replace(location.href)">
         <i class="layui-icon">&#x1002;</i>
     </button>
+
     <div style="padding: 40px 0px 0px 80px;">
         <div class="layui-inline">
             <div class="layui-input-inline" style="width:auto">
+                <a id="addProject" class="layui-btn layui-btn-normal">添加</a>
             </div>
         </div>
     </div>
@@ -41,26 +53,18 @@
 
     <div class="layui-field-box">
         <div id="dataContent" class="">
-
-            <table class="layui-hide" id="plan" lay-filter="table"></table>
+            <table class="layui-hide" id="job" lay-filter="table"></table>
             <script type="text/html" id="operator">
+                {{#  if(d.status == 0){ }}
+                <a class="layui-btn layui-btn-normal" lay-event="detail">查看</a>
+                <a class="layui-btn" lay-event="edit">编辑</a>
+                <a class="layui-btn" lay-event="public">发布</a>
                 <a class="layui-btn layui-btn-danger " lay-event="del">删除</a>
-            </script>
+                {{#  } else { }}
+                <a class="layui-btn layui-btn-normal" lay-event="detail">查看</a>
+                <a class="layui-btn" lay-event="republic">取消发布</a>
+                {{#  } }}
 
-            <script type="text/html" id="status">
-                <form class="layui-form" action="">
-                    <div class="layui-form-item" style="margin:0;">
-                        {{#  if(d.status == 0){ }}
-                        <span class="sys-title">请求已发布，待审核</span>
-                        {{#  } else if(d.status == 1){ }}
-                        <span class="sys-title">请求已通过，招聘信息未发布</span>
-                        {{#  } else if(d.status == 2){ }}
-                        <span class="sys-title">请求已通过，招聘信息已发布</span>
-                        {{#  } else if(d.status == 3){ }}
-                        <span class="sys-title">请求已拒绝，理由：{{d.reason}}</span>
-                        {{#  } }}
-                    </div>
-                </form>
             </script>
         </div>
     </div>
@@ -72,7 +76,7 @@
 <script type="text/javascript">
     layui.config({
         base: '${ctx}/js/'
-    }).use('college/index');
+    }).use('job/index');
 </script>
 </body>
 </html>
