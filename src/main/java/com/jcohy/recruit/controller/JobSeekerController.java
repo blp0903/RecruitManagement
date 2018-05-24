@@ -136,7 +136,7 @@ public class JobSeekerController extends BaseController{
      * @param resume
      * @return
      */
-    @GetMapping("/addResume")
+    @PostMapping("/addResume")
     @ResponseBody
     public JsonResult addResume(Resume resume) {
         try {

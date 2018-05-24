@@ -51,7 +51,8 @@ public class DeliveryRecord implements Serializable {
     private Job job;
 
     //投递时间
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.DATE)
     @Column(name = "delivery_time")
     private Date deliveryTime;
 

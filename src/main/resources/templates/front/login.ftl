@@ -111,37 +111,11 @@
                                     </div>
                                 </div>
 
-							    <#--<div class="layui-form-item">-->
-								    <#--<label class="layui-form-label">人类验证</label>-->
-								    <#--<div class="layui-input-inline">-->
-								      <#--<input type="text" name="verify" required lay-verify="required" autocomplete="off" placeholder="请回答后面问题" class="layui-input">-->
-								    <#--</div>-->
-								    <#--<div class="layui-form-mid">-->
-								    	<#--<span style="color:#c00" class="verift-text"></span>-->
-								    <#--</div>-->
-							    <#--</div>-->
 						        <div class="layui-form-item">
 								    <button class="layui-btn" lay-submit lay-filter="regForm">立即注册</button>
 							    </div>
 							</form>
 		    			</div>
-		    			<!-- 注册结束 -->
-		    			<!-- 忘记密码 -->
-		    			<#--<div class="layui-tab-item">-->
-		    				<#--<form class="layui-form layui-form-pane" method="post">-->
-		    					<#--<div class="layui-form-item">-->
-							    	<#--<label class="layui-form-label">帐号</label>-->
-						    		<#--<div class="layui-input-inline">-->
-						        		<#--<input type="email" name="num" required  lay-verify="number" autocomplete="off" class="layui-input">-->
-						        	<#--</div>-->
-								<#--</div>-->
-
-						   		<#--<div class="layui-form-item">-->
-						   		<#--<button class="layui-btn" lay-submit lay-filter="resetPwd">提交</button>-->
-						  	 	<#--</div>-->
-							<#--</form>-->
-		    			<#--</div>-->
-		    			<!-- 忘记密码结束 -->
 					</div>
 				</div>      
             </div>

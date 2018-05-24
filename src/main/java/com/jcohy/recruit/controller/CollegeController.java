@@ -15,6 +15,7 @@ import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/college")
@@ -307,14 +308,15 @@ public class CollegeController extends BaseController{
 
     @GetMapping("/hcList")
     @ResponseBody
-    public PageJson<Requirement> hcList(@SessionAttribute("user")Admin teacher, ModelMap map){
+    public PageJson<Requirement> hcList(@SessionAttribute("user")College college, ModelMap map){
         PageRequest pageRequest = getPageRequest();
         Page<Requirement> plans = requirementService.findAll(pageRequest);
+        List<Requirement> list = plans.stream().filter(x -> x.getCollege().getId() == college.getId()).collect(Collectors.toList());
         PageJson<Requirement> page = new PageJson<>();
         page.setCode(0);
         page.setMsg("成功");
-        page.setCount(plans.getSize());
-        page.setData(plans.getContent());
+        page.setCount(list.size());
+        page.setData(list);
         return page;
     }
 

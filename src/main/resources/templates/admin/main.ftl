@@ -60,11 +60,32 @@
                         </dl>
                     </li>
 
+                    <#--<li class="layui-nav-item">-->
+                        <#--<a href="javascript:;"><i class="fa fa-user"></i>招聘信息管理</a>-->
+                        <#--<dl class="layui-nav-child">-->
+                            <#--<dd><a href="javascript:;" data-url="${ctx!}/admin/managereq/index" data-id="5">请求审核</a></dd>-->
+                            <#--<dd><a href="javascript:;" data-url="${ctx!}/admin/job/index" data-id="6">职位管理</a></dd>-->
+                            <#--<dd><a href="javascript:;" data-url="${ctx!}/admin/check/index" data-id="7">应聘人员审核</a></dd>-->
+                        <#--</dl>-->
+                    <#--</li>-->
+
                     <li class="layui-nav-item">
                         <a href="javascript:;"><i class="fa fa-user"></i>招聘信息管理</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" data-url="${ctx!}/admin/managereq/index" data-id="5">请求审核</a></dd>
                             <dd><a href="javascript:;" data-url="${ctx!}/admin/job/index" data-id="6">职位管理</a></dd>
+                        </dl>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="fa fa-user"></i>审核管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" data-url="${ctx!}/admin/managereq/index" data-id="5">请求审核</a></dd>
+                        </dl>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="fa fa-user"></i>应聘人员审核</a>
+                        <dl class="layui-nav-child">
                             <dd><a href="javascript:;" data-url="${ctx!}/admin/check/index" data-id="7">应聘人员审核</a></dd>
                         </dl>
                     </li>

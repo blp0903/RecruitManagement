@@ -125,7 +125,7 @@
     	if (user!=null) {
     		user = JSON.parse(user);
     		$(".blog-user").empty();
-    		$(".blog-user").append('<a href="user/info"><img src="/images/login.png" alt="" title="" /></a>'+
+    		$(".blog-user").append('<a href="/"><img src="/images/login.png" alt="" title="" /></a>'+
             	'<a class="user-out"><i class="fa fa-sign-out"></i></a>');
     	} else {
     		$(".blog-user").empty();
