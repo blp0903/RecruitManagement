@@ -96,7 +96,7 @@
 							<div class="layui-form-item">
 								<label class="layui-form-label">出生日期</label>
 								<div class="layui-input-inline">
-									<input id="birth" type="text" name="birth" autocomplete="off" class="layui-input">
+									<input id="birth" type="text" name="births" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 
@@ -178,7 +178,7 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">出生日期</label>
                                 <div class="layui-input-inline">
-                                    <input id="resumebirth" type="text" name="phone" autocomplete="off" class="layui-input">
+                                    <input id="resumebirth" type="text" name="births" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
 

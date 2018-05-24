@@ -1,9 +1,17 @@
 var $;
-layui.use(['jquery','form','util','upload'], function () {
+layui.use(['jquery','form','util','upload','laydate'], function () {
     $ = layui.jquery;
     var util = layui.util,
      form = layui.form,
+	 laydate = layui.laydate,
      upload = layui.upload;
+
+    laydate.render({
+        elem: '#resumebirth' //指定元素
+    });
+    laydate.render({
+        elem: '#birth' //指定元素
+    });
 
     var user = MyLocalStorage.get("user");
     if (user!=null && user!='') {
