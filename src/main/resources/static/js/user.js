@@ -1,9 +1,17 @@
 var $;
-layui.use(['jquery','form','util','upload'], function () {
+layui.use(['jquery','form','util','upload','laydate'], function () {
     $ = layui.jquery;
     var util = layui.util,
      form = layui.form,
+	 laydate = layui.laydate,
      upload = layui.upload;
+
+    laydate.render({
+        elem: '#resumebirth' //指定元素
+    });
+    laydate.render({
+        elem: '#birth' //指定元素
+    });
 
     var user = MyLocalStorage.get("user");
     if (user!=null && user!='') {
@@ -58,14 +66,31 @@ layui.use(['jquery','form','util','upload'], function () {
 				var data = result.data;
 				var html = '';
 				for (var i=0; i<data.length; i++) {
-					if (data[i].status=='0') {
-                        html +=
-                            '<li id='+data[i].id+'> '+
-                            '<blockquote class="layui-elem-quote"><span>'+data[i].jobSeeker.name+'</span>投递了<a href="/jobSeeker/job/'+data[i].job.id+'">【'+data[i].job.name+"/"+data[i].job.location+"/"+data[i].job.numbers+"/"+data[i].job.treatment+'】</a></blockquote>'+
-                            '<p><span>'+data[i].deliveryTime+'</span>'+
-                            '<a href="javascript:msgDel(\''+data[i].id+'\');" class="layui-btn layui-btn-sm layui-btn-danger">取消投递</a></p>'+
-                            '</li>';
-					}
+					var status = '';
+
+					if(data[i].status === 0){
+                        status="【已投递，待审核】"
+					}else if(data[i].status === 1){
+                        status="【人事部已查看，人事部未通过】"
+					}else if(data[i].status === 2){
+                        status="【人事部已查看，人事部通过，待面试】"
+                    }else if(data[i].status === 3){
+                        status="【学院已通过，恭喜你！！】"
+                    }else if(data[i].status === 4){
+                        status="【学院未通过，继续加油！！】"
+                    }
+
+					html +=
+						'<li id='+data[i].id+'> '+
+						'<blockquote class="layui-elem-quote">'+
+						'<span>'+data[i].jobSeeker.name+'</span>投递了'+'' +
+						'<a href="/jobSeeker/job/'+data[i].job.id+'">【'+data[i].job.name+"/"+data[i].job.location+"/"+data[i].job.numbers+"/"+data[i].job.treatment+'】'+
+                        '<span style="color: red">'+status+'</span>'+
+						'</a></blockquote>'+
+						'<p><span>'+data[i].deliveryTime+'</span>'+
+						'<a href="javascript:msgDel(\''+data[i].id+'\');" class="layui-btn layui-btn-sm layui-btn-danger">取消投递</a></p>'+
+						'</li>';
+
 				}
 				$(".msgs").html(html);
 			} else {
@@ -77,8 +102,9 @@ layui.use(['jquery','form','util','upload'], function () {
     // 修改简历
     form.on('submit(resume)', function(data){
         data = data.field;
+        console.log(data);
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             data: data,
             async:true,
             url: "/jobSeeker/addResume",

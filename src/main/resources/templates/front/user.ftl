@@ -96,7 +96,7 @@
 							<div class="layui-form-item">
 								<label class="layui-form-label">出生日期</label>
 								<div class="layui-input-inline">
-									<input id="birth" type="text" name="birth" autocomplete="off" class="layui-input">
+									<input id="birth" type="text" name="births" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 
@@ -109,7 +109,8 @@
 		    		</div>
 		    		<!-- 我的简历 -->
     				<div class="layui-tab-item" id="resume">
-                        <form class="layui-form layui-form-pane" method="post">
+                        <form class="layui-form layui-form-pane">
+
                             <input id="resumeId" type="hidden" name="id">
 
                             <div class="layui-form-item">
@@ -177,7 +178,7 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">出生日期</label>
                                 <div class="layui-input-inline">
-                                    <input id="resumebirth" type="text" name="phone" autocomplete="off" class="layui-input">
+                                    <input id="resumebirth" type="text" name="births" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
 
@@ -197,6 +198,7 @@
                                     <button class="layui-btn" lay-submit lay-filter="resume">确认修改</button>
                                 </div>
                             </div>
+
                         </form>
     				</div>
 

@@ -1,5 +1,6 @@
 package com.jcohy.recruit.controller;
 
+import com.jcohy.date.DateUtils;
 import com.jcohy.lang.StringUtils;
 import com.jcohy.recruit.common.JsonResult;
 import com.jcohy.recruit.common.PageJson;
@@ -136,10 +137,12 @@ public class JobSeekerController extends BaseController{
      * @param resume
      * @return
      */
-    @GetMapping("/addResume")
+    @PostMapping("/addResume")
     @ResponseBody
-    public JsonResult addResume(Resume resume) {
+    public JsonResult addResume(Resume resume,String births) {
         try {
+            Date str = DateUtils.strToDate(births);
+            resume.setBirth(str);
             Resume res = resumeService.saveOrUpdate(resume);
             JobSeeker jobSeeker = jobSeekerService.findByNum(res.getNum());
             jobSeeker.setResume(res);

@@ -161,7 +161,7 @@ CREATE TABLE `delivery_record` (
   `college_id` int(11) NOT NULL,
   `resume_id` int(11) NOT NULL,
   `job_id` int(11) NOT NULL,
-  `delivery_time` timestamp(0) NOT NULL,
+  `delivery_time` datetime  NOT NULL,
   `delivery_status` int(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `fk_job_id` (`job_id`),
